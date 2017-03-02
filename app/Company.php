@@ -10,4 +10,9 @@ class Company extends Model
     protected $primaryKey = "Id";
     public $timestamps = false;
     protected $fillable = ['Code', 'Name', 'Description', 'Logo'];
+
+    public function scopeActive($query)
+    {
+        return $query->where('Active', true);
+    }
 }

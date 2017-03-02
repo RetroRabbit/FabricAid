@@ -19,7 +19,7 @@ class Company extends Migration
             $table->string('Name');
             $table->text('Description')->nullable();
             $table->text('Logo')->nullable();
-            $table->boolean('Active')->default('0');
+            $table->boolean('Active')->default(true);
         });
     }
 
