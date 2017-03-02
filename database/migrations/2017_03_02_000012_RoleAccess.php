@@ -13,7 +13,7 @@ class RoleAccess extends Migration
      */
     public function up()
     {
-        Schema::create('Access', function (Blueprint $table) {            
+        Schema::create('RoleAccess', function (Blueprint $table) {            
             $table->increments('Id');
             $table->integer('RoleId')->unsigned();
             $table->integer('AccessId')->unsigned();
@@ -30,6 +30,6 @@ class RoleAccess extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Role');
+        Schema::dropIfExists('RoleAccess');
     }
 }

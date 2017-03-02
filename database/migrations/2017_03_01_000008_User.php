@@ -22,9 +22,9 @@ class User extends Migration
             $table->boolean('Confirmed');
             $table->date('DateCreated');
             $table->boolean('Active');
-            $table->integer('RoleId')->unsigned();
-            $table->integer('ArtisanTypeId')->unsigned();
-            $table->integer('CompanyId')->unsigned();
+            $table->integer('RoleId')->unsigned()->nullable();
+            $table->integer('ArtisanTypeId')->unsigned()->nullable();
+            $table->integer('CompanyId')->unsigned()->nullable();
 
             $table->foreign('RoleId')->references('Id')->on('Role')->onDelete('cascade');
             $table->foreign('ArtisanTypeId')->references('Id')->on('ArtisanType')->onDelete('cascade');

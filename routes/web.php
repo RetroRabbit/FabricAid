@@ -19,7 +19,7 @@ Route::get('/admin/users/create', 'AdminController@users_create')->name('admin-u
 Route::post('/admin/users/create', 'AdminController@users_new');
 
 Route::get('/admin/users/update/{user}', 'AdminController@users_update')->name('admin-users-update');
-Route::get('/admin/users/update/{user}', 'AdminController@users_save');
+Route::post('/admin/users/update/{user}', 'AdminController@users_save');
 
 Route::get('/admin/users/delete/{user}', 'AdminController@users_delete')->name('admin-users-delete');
 // ADMIN
