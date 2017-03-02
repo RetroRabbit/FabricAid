@@ -37,7 +37,7 @@ class AdminController extends Controller
 
         if ($validator->fails())
         {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withInput()->withErrors($validator);
         }
         else
         {
@@ -66,7 +66,7 @@ class AdminController extends Controller
 
         if ($validator->fails())
         {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withInput()->withErrors($validator);
         }
         else
         {

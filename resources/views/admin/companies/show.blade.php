@@ -6,9 +6,9 @@
     <div id="table-create" class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
             <a class="col-xs-2 col-lg-offset-1 btn btn-success" href="{{ route('admin-companies-create') }}">
-                <i class="fa fa-plus col-xs-0 col-sm-0 col-md-3" style="line-height: 20px;"></i>
-                <span class="col-xs-12 col-sm-12 col-md-9">Create</span>
-            <a/>
+                <i class="fa fa-plus col-xs-12 col-sm-12 col-md-3" style="line-height: 20px;"></i>
+                <span class="col-xs-0 col-sm-0 col-md-9">Create</span>
+            </a>
         <div> 
     </div>
 
