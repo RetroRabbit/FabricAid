@@ -20,7 +20,7 @@ class AdminController extends Controller
 
     public function roles_show()
     {
-        $roles = [];
+        $roles = Role::all();
         return view('admin.roles.show')->with('title', 'Admin | View Roles')->with('roles', $roles);
     }
     // VIEWS
