@@ -28,6 +28,14 @@ Route::get('/artisan/jobs',         'ArtisanController@jobs')->name('artisan-job
 Route::get('/artisan/history',      'ArtisanController@history')->name('artisan-history');
 // USER
 
+//ADMIN
+Route::get('/admin/dashboard',              'AdminController@dashboard')->name('admin-dashboard');
+
+Route::get('/admin/roles/show',             'AdminController@roles_show')->name('admin-roles-show');
+Route::post('/admin/roles/update/{role}',   'AdminController@roles_update')->name('admin-roles-update');
+Route::post('/admin/roles/create',          'AdminController@roles_create')->name('admin-roles-create');
+//ADMIN
+
 // ERROR 404
 Route::get('/{any}',    'HomeController@error404')->where('any', '.*')->name('home-error404');
 // ERROR 404
