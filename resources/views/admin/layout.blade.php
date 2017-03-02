@@ -1,8 +1,5 @@
 @extends("layouts.master")
 
 @section('nav-content')
-@endsection
-
-@section("content")
-@yield("content-body")
+<li id="dashboard"><a href="{{ route('admin-companies-show') }}">Companies</a></li> 
 @endsection
