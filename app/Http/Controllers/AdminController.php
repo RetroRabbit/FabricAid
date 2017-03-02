@@ -26,19 +26,43 @@ class AdminController extends Controller
     // VIEWS
 
     // ACTIONS
-    public function roles_update(Role $srole)
+    public function roles_update(Role $role)
     {
-        return redirect()->route('admin-dashboard');
+        $validator = validator()->make(request()->only('Name'), ['Name' => 'required|unique:Role']);
+        
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator);
+        }
+        else
+        {
+            $role->Name = request()->input('Name');
+            $role->save();
+
+            return redirect()->route('admin-roles-show');
+        }
     }
 
     public function roles_create()
     {
-        return redirect()->route('admin-dashboard');
+        $validator = validator()->make(request()->only('Name'), ['Name' => 'required|unique:Role']);
+        
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator);
+        }
+        else
+        {
+            Role::firstOrCreate(request()->only('Name'));
+            return redirect()->route('admin-roles-show');
+        }
     }
 
-    public function roles_delete(Role $srole)
+    public function roles_delete(Role $role)
     {
-        return redirect()->route('admin-dashboard');
+        $role->delete();
+
+        return redirect()->route('admin-roles-show');
     }
     // ACTIONS
 }

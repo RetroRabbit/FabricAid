@@ -1,6 +1,8 @@
 @extends('admin.layout')
 
 @section('content')
+@include('layouts.errors')
+
 <div class="container">
     <div id="table-header" class="row">
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 form-group">
@@ -20,12 +22,14 @@
         @endfor
     </div>
 
-    <div id="table-footer" class="row">
+    <form id="table-footer" class="row" method="post" action="{{ route('admin-roles-create') }}">
+        {{ csrf_field() }}
+
         <div class="col-xs-12 col-sm-8 col-sm-offset-2 form-group">
             <label class="col-xs-2">New</label>
             <input class="col-xs-8" name="Name" type="text" value="{{ old('Name') }}" placeholder="Enter a role title"/>
             <input class="col-xs-2" type="submit" name="Submit" value="Create" />
         <div>
-    </div>
+    </form>
 </div>
 @endsection
