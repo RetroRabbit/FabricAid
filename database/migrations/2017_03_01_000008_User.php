@@ -19,19 +19,17 @@ class User extends Migration
             $table->string('LastName');
             $table->string('Email')->unique();
             $table->string('Password');
-            $table->boolean('Confirmed');
+            $table->boolean('Confirmed')->default(false);
             $table->date('DateCreated');
-            $table->boolean('Active');
-            $table->integer('RoleId')->unsigned();
-            $table->integer('ArtisanTypeId')->unsigned();
-            $table->integer('CompanyId')->unsigned();
+            $table->boolean('Active')->default(false);
+            $table->integer('RoleId')->unsigned()->nullable();
+            $table->integer('ArtisanTypeId')->unsigned()->nullable();
+            $table->integer('CompanyId')->unsigned()->nullable();
+            $table->rememberToken();
 
             $table->foreign('RoleId')->references('Id')->on('Role')->onDelete('cascade');
             $table->foreign('ArtisanTypeId')->references('Id')->on('ArtisanType')->onDelete('cascade');
             $table->foreign('CompanyId')->references('Id')->on('Company')->onDelete('cascade');
-            $table->rememberToken();
-           
-            $table->timestamps();
         });
     }
 
