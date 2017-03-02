@@ -28,7 +28,22 @@ class AdminController extends Controller
 
     public function companies_create()
     {
-        return redirect()->route('admin.companies.show');
+        $fields = request()->only('Code', 'Name', 'Description', 'Logo');
+        $validator = validator()->make(request()->except('Submit'),
+        [
+            'Code' => 'required|unique:Company',
+            'Name' => 'required'
+        ]);
+
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator);
+        }
+        else
+        {
+            Company::firstOrCreate(request()->only('Code', 'Name', 'Description', 'Logo'));
+            return redirect()->route('admin-companies-show');
+        }
     }
     // ACTIONS
 }

@@ -1,6 +1,7 @@
 @extends('admin.layout')
 
 @section('content') 
+@include('layouts.errors')
 <div class="container" style="margin-top: 100px;">
     <div id="table-header" class="row"> 
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1 form-group"> 
@@ -26,7 +27,9 @@
         @endfor 
     </div> 
 
-    <div id="table-footer" class="row"> 
+    <form id="table-footer" class="row" method="post" action="{{ route('admin-companies-create') }}"> 
+        {{ csrf_field() }} 
+
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1 form-group"> 
             <label class="col-xs-2">New</label> 
             <input class="col-xs-2" name="Code" type="text" value="{{ old('Code') }}" placeholder="JHB-S1"/> 
@@ -35,6 +38,6 @@
             <input class="col-xs-2" name="Logo" type="file" value="{{ old('Logo') }}"> 
             <input class="col-xs-2" type="submit" name="Submit" value="Create" /> 
         <div> 
-    </div> 
+    </form> 
 </div> 
 @endsection
