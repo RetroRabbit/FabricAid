@@ -1,8 +1,6 @@
-@extends("layouts.master")
+@extends('layouts.master')
 
 @section('nav-content')
-@endsection
-
-@section("content")
-@yield("content-body")
+<li id="dashboard"><a href="{{ route('admin-dashboard') }}">Dashboard</a></li>
+<li id="dashboard"><a href="{{ route('admin-roles-show') }}">Roles</a></li>
 @endsection
