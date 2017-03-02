@@ -13,10 +13,20 @@ class AdminController extends Controller
         $companies = Company::active()->get();
         return view('admin.companies.show')->with('title', 'Admin | View Companies')->with('companies', $companies);
     }
+
+    public function companies_update(Company $company)
+    {
+        return view('admin.companies.update')->with('title', 'Admin | Update Company')->with('company', $company);
+    }
+
+    public function companies_create()
+    {
+        return view('admin.companies.create')->with('title', 'Admin | New Company');
+    }
     // VIEWS
     
     // ACTIONS
-    public function companies_update(Company $company)
+    public function companies_save(Company $company)
     {
         $fields = request()->only('Code', 'Name', 'Description', 'Logo');
         $validator = validator()->make(request()->except('Submit'),
@@ -45,7 +55,7 @@ class AdminController extends Controller
         return redirect()->route('admin-companies-show');
     }
 
-    public function companies_create()
+    public function companies_new()
     {
         $fields = request()->only('Code', 'Name', 'Description', 'Logo');
         $validator = validator()->make(request()->except('Submit'),

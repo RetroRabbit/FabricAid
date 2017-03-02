@@ -12,8 +12,14 @@
 */
 
 
+// ADMIN
+Route::get('/admin/companies/show',                 'AdminController@companies_show')->name('admin-companies-show');
 
-Route::get('/admin/companies/show',             'AdminController@companies_show')->name('admin-companies-show'); 
-Route::post('/admin/companies/update/{company}',   'AdminController@companies_update')->name('admin-companies-update'); 
-Route::get('/admin/companies/delete/{company}',    'AdminController@companies_delete')->name('admin-companies-delete'); 
-Route::post('/admin/companies/create',          'AdminController@companies_create')->name('admin-companies-create'); 
+Route::get('/admin/companies/create',               'AdminController@companies_create')->name('admin-companies-create');
+Route::post('/admin/companies/create',              'AdminController@companies_new'); 
+
+Route::get('/admin/companies/update/{company}',     'AdminController@companies_update')->name('admin-companies-update');
+Route::post('/admin/companies/update/{company}',    'AdminController@companies_save'); 
+
+Route::get('/admin/companies/delete/{company}',     'AdminController@companies_delete')->name('admin-companies-delete'); 
+// ADMIN
