@@ -1,6 +1,6 @@
-@extends("home.layout")
+@extends('home.layout')
 
-@section("content-body")
+@section('content')
 <div>
     <h1>Error: 404</h1>
     <p>Seems like the page you're looking for doesn't exist.</p>
