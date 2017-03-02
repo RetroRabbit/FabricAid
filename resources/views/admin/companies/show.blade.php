@@ -9,9 +9,16 @@
                 <i class="fa fa-plus col-xs-12 col-sm-12 col-md-3" style="line-height: 20px;"></i>
                 <span class="col-xs-0 col-sm-0 col-md-9">Create</span>
             </a>
-        <div> 
+        </div> 
     </div>
-
+@if(count($companies) == 0)
+    <div id="nothing" class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
+            <h1>Nothing here</h1>
+            <h3>Look like there are no companies to display</h3>
+        </div>
+    </div>
+@else
     <div id="table-header" class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
             <p class="col-xs-1"><strong>#</strong></p>
@@ -31,5 +38,6 @@
         </div>
         @endfor
     </div>
+@endif
 </div>
 @endsection

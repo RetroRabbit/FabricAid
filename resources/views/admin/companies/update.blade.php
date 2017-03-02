@@ -27,7 +27,7 @@
                 <label for="Logo" class="col-xs-5"><strong>Company Logo</strong></label>
                 <input class="col-xs-7" id="Logo" name="Logo" type="file" value="{{ $company->Logo }}"> 
             </div>
-            <input class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-0" type="submit" name="Submit" value="Create" /> 
+            <input class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-0" type="submit" name="Submit" value="Update" /> 
         <div> 
     </form> 
 </div> 
