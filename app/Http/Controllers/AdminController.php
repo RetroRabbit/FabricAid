@@ -26,5 +26,59 @@ class AdminController extends Controller
     // VIEWS
 
     // ACTIONS
+    public function new()
+    {
+        $fields = request()->only('FirstName', 'LastName', 'Email', 'Password');
+        $validator = validator()->make(request()->except('Submit'),
+        [
+            'FirstName' => 'required',
+            'FirstName' => 'required',
+            'Email' => 'required|unique:User',
+            'Password' => 'required'
+        ]);
+
+        if ($validator->fails())
+        {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+        else
+        {
+            User::firstOrCreate($fields);
+
+            return redirect()->route('admin-users-show');
+        }
+    }
+
+    public function save(User $user)
+    {
+        $fields = request()->only('FirstName', 'LastName', 'Email', 'Password');
+        $validator = validator()->make(request()->except('Submit'),
+        [
+            'FirstName' => 'required',
+            'FirstName' => 'required',
+            'Email' => 'required|unique:User',
+            'Password' => 'required'
+        ]);
+
+        if ($validator->fails())
+        {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+        else
+        {
+            $user->fill($fields);
+            $user->save();
+
+            return redirect()->route('admin-users-show');
+        }
+    }
+
+    public function delete(User $user)
+    {
+        $user->Active = false;
+        $user-save();
+
+        return redirect()->route('admin-users-show');
+    }
     // ACTIONS
 }
