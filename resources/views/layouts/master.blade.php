@@ -8,7 +8,7 @@
         <meta name="author" content="">
         <link rel="shortcut icon" href="assets/ico/favicon.ico">
 
-        <title>SOLID - Bootstrap 3 Theme</title>
+        <title>{{ $title }}</title>
 
         @include('includes.head')
     </head>
@@ -24,7 +24,7 @@
                         <span class="icon-bar"></span>
                     </button>
 
-                    <p class="navbar-brand" href="#">SCOPE OF WORK | SOW</p>
+                    <p class="navbar-brand" href="#">FabricAid</p>
                 </div>
 
                 <div class="navbar-collapse collapse navbar-right">            
@@ -35,7 +35,9 @@
             </div>
         </div>
         
+        <div class="container-fluid" style="margin-top: 100px">
         @yield('content')
+        </div>
 
         @include('includes.scripts')
     </body>

@@ -1,4 +1,5 @@
 @if($errors != null && count($errors))
+<div class="alert alert-danger col-xs-12">    
 <div class="alert alert-danger col-xs-12 col-sm-10 col-sm-offset-1">    
     <ul>
         @foreach ($errors->all() as $error)

@@ -9,5 +9,7 @@ class FocusArea extends Model
     protected $primaryKey = 'Id';
     protected $table = 'FocusArea';
     public $timestamps = false;
+    protected $table = 'FocusArea';
+    protected $primaryKey = 'Id';
     protected $fillable = ['Code', 'Name'];
 }
