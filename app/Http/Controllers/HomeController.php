@@ -16,7 +16,7 @@ class HomeController extends Controller
         return 'Email';
     }
 
-    // VIEWS -----------------------------------------
+    // VIEWS
     public function index()
     {
         return view("home.index")->with('title', 'Home');
@@ -36,10 +36,10 @@ class HomeController extends Controller
     {
         return view("home.error404")->with('title', 'Error 404');
     }
-    // VIEWS -----------------------------------------
+    // VIEWS
 
 
-    // ACTIONS -----------------------------------------
+    // ACTIONS
     // LOGIN
     public function fetch()
     {
@@ -94,5 +94,5 @@ class HomeController extends Controller
         //auth()->logout();
         return redirect()->route('home-index');
     }
-    // ACTIONS -----------------------------------------
+    // ACTIONS
 }

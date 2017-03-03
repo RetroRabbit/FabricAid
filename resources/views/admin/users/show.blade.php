@@ -30,11 +30,11 @@
     <div id="table-body" class="row">
         @for($i = 0; $i < count($users); ++$i)
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
-            <p class="col-xs-1">{{ $i + 1 }}</pl>
-            <p class="col-xs-6">{{ $users[$i]->FirstName }}&nbsp;{{ $users[$i]->LastName }}<p/>
-            <p class="col-xs-3">{{ $users[$i]->Email }}<p/>
-            <a class="col-xs-1" href="{{ route('admin-users-update', $users[$i]->Id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-            <a class="col-xs-1" href="{{ route('admin-users-delete', $users[$i]->Id) }}"><i class="fa fa-ban" aria-hidden="true"></i></a>
+            <p class="col-xs-1">{{ $i + 1 }}</p>
+            <p class="col-xs-4">{{ $users[$i]->FirstName }}&nbsp;{{ $users[$i]->LastName }}</p>
+            <p class="col-xs-5">{{ $users[$i]->Email }}</p>
+            <a class="col-xs-1" href="{{ route('admin-users-update', $users[$i]->Id) }}"><i class="fa fa-pencil" aria-hidden="true" style="line-height: 40px;"></i></a>
+            <a class="col-xs-1" href="{{ route('admin-users-delete', $users[$i]->Id) }}"><i class="fa fa-ban" aria-hidden="true" style="line-height: 40px;"></i></a>
         </div>
         @endfor
     </div>

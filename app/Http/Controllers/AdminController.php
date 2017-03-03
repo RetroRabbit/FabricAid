@@ -9,10 +9,11 @@ use Carbon\Carbon;
 
 class AdminController extends Controller
 {
+    // USERS -----------------------------------
     // VIEWS
     public function users_show()
     {
-        $users = User::where('Active', true)->select(['Id', 'FirstName', 'LastName', 'Email'])->get();
+        $users = User::active()->select(['Id', 'FirstName', 'LastName', 'Email'])->get();
         
         return view('admin.users.show')->with('title', 'Admin | View Users')
                                        ->with('users', $users);
@@ -94,8 +95,10 @@ class AdminController extends Controller
         return redirect()->route('admin-users-show');
     }
     // ACTIONS
+    // USERS -----------------------------------
 
 
+    // COMPANIES -----------------------------------
     // VIEWS
     public function companies_show()
     {
@@ -163,16 +166,14 @@ class AdminController extends Controller
             return redirect()->route('admin-companies-show');
         }
     }
-    public function __construct()
-    {
-
-    }
+    // USERS -----------------------------------
 
     public function dashboard()
     {
         return view('admin.dashboard')->with('title', 'Admin | Dashboard');
     }
 
+    // ROLES -----------------------------------
     public function roles_show()
     {
         $roles = [];
@@ -191,4 +192,5 @@ class AdminController extends Controller
         return redirect()->route('admin-dashboard');
     }
     // ACTIONS
+    // ROLES -----------------------------------
 }

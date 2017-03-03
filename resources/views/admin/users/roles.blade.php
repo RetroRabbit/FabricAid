@@ -9,34 +9,34 @@
         
         <div class="row form-group">
             <label for="FirstName" class="col-xs-5"><strong>First Name</strong></label>
-            <input class="col-xs-7" id="FirstName" name="FirstName" type="text" value="{{ $user->FirstName }}" placeholder="John"/> 
+            <input class="col-xs-7" id="FirstName" name="FirstName" type="text" value="{{ old('FirstName') }}" placeholder="John"/> 
         </div>
         
         <div class="row form-group">
             <label for="LastName" class="col-xs-5"><strong>Last Name</strong></label>
-            <input class="col-xs-7" id="LastName" name="LastName" type="text" value="{{ $user->LastName }}" placeholder="Doe"/> 
+            <input class="col-xs-7" id="LastName" name="LastName" type="text" value="{{ old('LastName') }}" placeholder="Doe"/> 
         </div>
         
         <div class="row form-group">
             <label for="Email" class="col-xs-5"><strong>Email</strong></label>
-            <input class="col-xs-7" id="Email" name="Email" type="email" value="{{ $user->Email }}" placeholder="jdoe@domain.com"/> 
+            <input class="col-xs-7" id="Email" name="Email" type="email" value="{{ old('Email') }}" placeholder="jdoe@domain.com"/> 
         </div>
         
         <div class="row form-group">
             <label for="Password" class="col-xs-5"><strong>Password</strong></label>
-            <input class="col-xs-7" id="Password" name="Password" type="text" value="{{ $user->Password }}" placeholder="somepass"/> 
+            <input class="col-xs-7" id="Password" name="Password" type="text" value="{{ old('Password') }}" placeholder="somepass"/> 
         </div>
         
         <div class="row form-group">
             <label for="RoleId" class="col-xs-5"><strong>User Role</strong></label>
-            <select class="col-xs-7" id="RoleId" name="RoleId" value="{{ $user->RoleId }}">
+            <select class="col-xs-7" id="RoleId" name="RoleId">
                 <option>---</option>
                 @foreach($roles as $role)
                 <option value="{{ $role->Id }}">{{ $role->Name }}</option>
                 @endforeach
             </select>
         </div>
-        <input class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-0" type="submit" name="Submit" value="Update" />
+        <input class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-0" type="submit" name="Submit" value="Create" />
     </form> 
 </div> 
 @endsection
