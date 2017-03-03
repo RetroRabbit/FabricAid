@@ -1,110 +1,225 @@
-USE [master]
-GO
+-- Created by Vertabelo (http://vertabelo.com)
+-- Last modification date: 2017-03-01 07:27:49.13
 
-/****** Object:  Database [FabricAid_Dev]    Script Date: 2017/02/27 10:10:28 AM ******/
-CREATE DATABASE [FabricAid_Dev]
- CONTAINMENT = NONE
- ON  PRIMARY
-( NAME = N'FabricAid_Dev', FILENAME = N'C:\Data\FabricAid_Dev.mdf' , SIZE = 5120KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
- LOG ON
-( NAME = N'FabricAid_Dev_log', FILENAME = N'C:\Data\FabricAid_Dev_log.ldf' , SIZE = 2048KB , MAXSIZE = 2048GB , FILEGROWTH = 1024KB )
-GO
+-- tables
+-- Table: Area
+CREATE TABLE Area (
+    Id int NOT NULL,
+    Code varchar(255) NOT NULL,
+    Name varchar(255) NOT NULL,
+    Location varchar(255) NULL,
+    CompanyId int NOT NULL,
+    CONSTRAINT Area_pk PRIMARY KEY (Id)
+);
 
-ALTER DATABASE [FabricAid_Dev] SET COMPATIBILITY_LEVEL = 120
-GO
+-- Table: ArtisanType
+CREATE TABLE ArtisanType (
+    Id int NOT NULL,
+    Name varchar(255) NOT NULL,
+    CONSTRAINT ArtisanType_pk PRIMARY KEY (Id)
+);
 
-IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
-begin
-EXEC [FabricAid_Dev].[dbo].[sp_fulltext_database] @action = 'enable'
-end
-GO
+-- Table: Category
+CREATE TABLE Category (
+    Id int NOT NULL,
+    Code varchar(255) NOT NULL,
+    Name varchar(255) NOT NULL,
+    CONSTRAINT Category_pk PRIMARY KEY (Id)
+);
 
-ALTER DATABASE [FabricAid_Dev] SET ANSI_NULL_DEFAULT OFF
-GO
+-- Table: Company
+CREATE TABLE Company (
+    Id int NOT NULL,
+    Code varchar(255) NOT NULL,
+    Name varchar(255) NOT NULL,
+    Description text NULL,
+    Logo nvarchar(max) NULL,
+    Active bool NOT NULL DEFAULT '0',
+    CONSTRAINT Company_pk PRIMARY KEY (Id)
+);
 
-ALTER DATABASE [FabricAid_Dev] SET ANSI_NULLS OFF
-GO
+-- Table: FocusArea
+CREATE TABLE FocusArea (
+    Id int NOT NULL,
+    Code varchar(255) NOT NULL,
+    Name varchar(255) NOT NULL,
+    CONSTRAINT FocusArea_pk PRIMARY KEY (Id)
+);
 
-ALTER DATABASE [FabricAid_Dev] SET ANSI_PADDING OFF
-GO
+-- Table: Job
+CREATE TABLE Job (
+    Id int NOT NULL,
+    Priority int NOT NULL,
+    DateCreated date NOT NULL,
+    PlannedStartDate date NOT NULL,
+    PlannedCompletionDate date NOT NULL,
+    PlannedHours int NOT NULL,
+    EstimatedCost decimal(6,2) NOT NULL DEFAULT '0.00',
+    Comments text NOT NULL,
+    ActualHours int NOT NULL,
+    ActualCost decimal(6,2) NOT NULL,
+    JobDetails varchar(max) NOT NULL,
+    TooltId int NOT NULL,
+    MachineId int NOT NULL,
+    AreaId int NOT NULL,
+    CreatedBy int NOT NULL,
+    AssignedBy int NOT NULL,
+    AssignedTo int NOT NULL,
+    CategoryId int NOT NULL,
+    TypeId int NOT NULL,
+    TemplateId int NOT NULL,
+    FocusAreaId int NOT NULL,
+    StatusId int NOT NULL,
+    CompanyId int NOT NULL,
+    CONSTRAINT Job_pk PRIMARY KEY (Id)
+);
 
-ALTER DATABASE [FabricAid_Dev] SET ANSI_WARNINGS OFF
-GO
+-- Table: Machine
+CREATE TABLE Machine (
+    Id int NOT NULL,
+    Code varchar(255) NOT NULL,
+    Name varchar(255) NOT NULL AUTO_INCREMENT,
+    AreaId int NOT NULL,
+    CONSTRAINT Machine_pk PRIMARY KEY (Id)
+);
 
-ALTER DATABASE [FabricAid_Dev] SET ARITHABORT OFF
-GO
+-- Table: Role
+CREATE TABLE Role (
+    Id int NOT NULL,
+    Name varchar(255) NOT NULL,
+    CONSTRAINT Role_pk PRIMARY KEY (Id)
+);
 
-ALTER DATABASE [FabricAid_Dev] SET AUTO_CLOSE OFF
-GO
+-- Table: Status
+CREATE TABLE Status (
+    Id int NOT NULL,
+    Code varchar(255) NOT NULL,
+    Name varchar(255) NOT NULL,
+    CONSTRAINT JobStatus_pk PRIMARY KEY (Id)
+);
 
-ALTER DATABASE [FabricAid_Dev] SET AUTO_SHRINK OFF
-GO
+-- Table: Template
+CREATE TABLE Template (
+    Id int NOT NULL,
+    Code varchar(255) NOT NULL,
+    Name varchar(255) NOT NULL,
+    Details text NOT NULL,
+    Active bool NOT NULL,
+    CompanyId int NOT NULL,
+    CONSTRAINT Template_pk PRIMARY KEY (Id)
+);
 
-ALTER DATABASE [FabricAid_Dev] SET AUTO_UPDATE_STATISTICS ON
-GO
+-- Table: Tool
+CREATE TABLE Tool (
+    Id int NOT NULL,
+    Code varchar(255) NOT NULL,
+    Name varchar(255) NOT NULL,
+    Description text NULL,
+    MachineId int NOT NULL,
+    CONSTRAINT Component_pk PRIMARY KEY (Id)
+);
 
-ALTER DATABASE [FabricAid_Dev] SET CURSOR_CLOSE_ON_COMMIT OFF
-GO
+-- Table: Type
+CREATE TABLE Type (
+    Id int NOT NULL,
+    Code varchar(255) NOT NULL,
+    Name varchar(255) NOT NULL,
+    CONSTRAINT Type_pk PRIMARY KEY (Id)
+);
 
-ALTER DATABASE [FabricAid_Dev] SET CURSOR_DEFAULT  GLOBAL
-GO
+-- Table: User
+CREATE TABLE User (
+    Id int NOT NULL,
+    FirstName varchar(255) NOT NULL,
+    LastName varchar(255) NOT NULL,
+    Email varchar(255) NOT NULL,
+    Pasword varchar(255) NOT NULL,
+    Confirmed bool NOT NULL DEFAULT '0',
+    DateCreated date NOT NULL,
+    Active bool NOT NULL DEFAULT '0',
+    RoleId int NOT NULL,
+    ArtisanTypeId int NOT NULL,
+    CompanyId int NOT NULL,
+    UNIQUE INDEX AK_0 (Email),
+    CONSTRAINT User_pk PRIMARY KEY (Id)
+);
 
-ALTER DATABASE [FabricAid_Dev] SET CONCAT_NULL_YIELDS_NULL OFF
-GO
+-- foreign keys
+-- Reference: Company_Area (table: Area)
+ALTER TABLE Area ADD CONSTRAINT Company_Area FOREIGN KEY Company_Area (CompanyId)
+    REFERENCES Company (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET NUMERIC_ROUNDABORT OFF
-GO
+-- Reference: Component_fk1 (table: Tool)
+ALTER TABLE Tool ADD CONSTRAINT Component_fk1 FOREIGN KEY Component_fk1 (MachineId)
+    REFERENCES Machine (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET QUOTED_IDENTIFIER OFF
-GO
+-- Reference: JobTemplate_Company (table: Template)
+ALTER TABLE Template ADD CONSTRAINT JobTemplate_Company FOREIGN KEY JobTemplate_Company (CompanyId)
+    REFERENCES Company (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET RECURSIVE_TRIGGERS OFF
-GO
+-- Reference: Job_Company (table: Job)
+ALTER TABLE Job ADD CONSTRAINT Job_Company FOREIGN KEY Job_Company (CompanyId)
+    REFERENCES Company (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET  DISABLE_BROKER
-GO
+-- Reference: Job_FocusArea (table: Job)
+ALTER TABLE Job ADD CONSTRAINT Job_FocusArea FOREIGN KEY Job_FocusArea (FocusAreaId)
+    REFERENCES FocusArea (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET AUTO_UPDATE_STATISTICS_ASYNC OFF
-GO
+-- Reference: Job_JobCategory (table: Job)
+ALTER TABLE Job ADD CONSTRAINT Job_JobCategory FOREIGN KEY Job_JobCategory (CategoryId)
+    REFERENCES Category (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET DATE_CORRELATION_OPTIMIZATION OFF
-GO
+-- Reference: Job_JobTemplate (table: Job)
+ALTER TABLE Job ADD CONSTRAINT Job_JobTemplate FOREIGN KEY Job_JobTemplate (TemplateId)
+    REFERENCES Template (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET TRUSTWORTHY OFF
-GO
+-- Reference: Job_JobType (table: Job)
+ALTER TABLE Job ADD CONSTRAINT Job_JobType FOREIGN KEY Job_JobType (TypeId)
+    REFERENCES Type (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET ALLOW_SNAPSHOT_ISOLATION OFF
-GO
+-- Reference: Job_Status (table: Job)
+ALTER TABLE Job ADD CONSTRAINT Job_Status FOREIGN KEY Job_Status (StatusId)
+    REFERENCES Status (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET PARAMETERIZATION SIMPLE
-GO
+-- Reference: Job_fk0 (table: Job)
+ALTER TABLE Job ADD CONSTRAINT Job_fk0 FOREIGN KEY Job_fk0 (AssignedBy)
+    REFERENCES User (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET READ_COMMITTED_SNAPSHOT OFF
-GO
+-- Reference: Job_fk1 (table: Job)
+ALTER TABLE Job ADD CONSTRAINT Job_fk1 FOREIGN KEY Job_fk1 (CreatedBy)
+    REFERENCES User (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET HONOR_BROKER_PRIORITY OFF
-GO
+-- Reference: Job_fk2 (table: Job)
+ALTER TABLE Job ADD CONSTRAINT Job_fk2 FOREIGN KEY Job_fk2 (AssignedTo)
+    REFERENCES User (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET RECOVERY SIMPLE
-GO
+-- Reference: Job_fk5 (table: Job)
+ALTER TABLE Job ADD CONSTRAINT Job_fk5 FOREIGN KEY Job_fk5 (AreaId)
+    REFERENCES Area (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET  MULTI_USER
-GO
+-- Reference: Job_fk7 (table: Job)
+ALTER TABLE Job ADD CONSTRAINT Job_fk7 FOREIGN KEY Job_fk7 (TooltId)
+    REFERENCES Tool (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET PAGE_VERIFY CHECKSUM
-GO
+-- Reference: Machine_Job (table: Job)
+ALTER TABLE Job ADD CONSTRAINT Machine_Job FOREIGN KEY Machine_Job (MachineId)
+    REFERENCES Machine (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET DB_CHAINING OFF
-GO
+-- Reference: Machine_fk0 (table: Machine)
+ALTER TABLE Machine ADD CONSTRAINT Machine_fk0 FOREIGN KEY Machine_fk0 (AreaId)
+    REFERENCES Area (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF )
-GO
+-- Reference: User_ArtisanType (table: User)
+ALTER TABLE User ADD CONSTRAINT User_ArtisanType FOREIGN KEY User_ArtisanType (ArtisanTypeId)
+    REFERENCES ArtisanType (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET TARGET_RECOVERY_TIME = 0 SECONDS
-GO
+-- Reference: User_Company (table: User)
+ALTER TABLE User ADD CONSTRAINT User_Company FOREIGN KEY User_Company (CompanyId)
+    REFERENCES Company (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET DELAYED_DURABILITY = DISABLED
-GO
+-- Reference: User_Role (table: User)
+ALTER TABLE User ADD CONSTRAINT User_Role FOREIGN KEY User_Role (RoleId)
+    REFERENCES Role (Id);
 
-ALTER DATABASE [FabricAid_Dev] SET  READ_WRITE
-GO
+-- End of file.
+
