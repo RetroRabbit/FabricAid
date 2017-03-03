@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Access extends Model
 {
-    protected $primaryKey = 'Id';
-    protected $table = 'Access';
     public $timestamps = false;
+    protected $table = 'Access';
+    protected $primaryKey = 'Id';
     protected $fillable = ['Code', 'Name'];
 }
