@@ -3,17 +3,17 @@
 @section('content')
 @include('layouts.errors')
 
-<form method="post">
+<form method="post" class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
     {{ csrf_field() }}
 
-    <div class="form-group">
-        <label for="Email">Email</label>
-        <input id="Email" name="Email" type="email" value="{{ old('Email') }}" placeholder="Enter a name..." />
+    <div class="form-group col-xs-12">
+        <label class="col-xs-12 col-sm-4" for="Email">Email</label>
+        <input class="col-xs-12 col-sm-8" id="Email" name="Email" type="email" value="{{ old('Email') }}" placeholder="Enter a name..." />
     </div>
     
-    <div class="form-group">
-        <label for="Password">Password</label>
-        <input id="Password" name="Password" type="password" placeholder="Enter a name..." />
+    <div class="form-group col-xs-12">
+        <label class="col-xs-12 col-sm-4" for="Password">Password</label>
+        <input class="col-xs-12 col-sm-8" id="Password" name="Password" type="password" placeholder="Enter a name..." />
     </div>
     
     <div class="form-group">

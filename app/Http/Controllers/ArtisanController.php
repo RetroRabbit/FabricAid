@@ -10,7 +10,7 @@ class ArtisanController extends Controller
     public function __construct()
     {
         /*if (!auth()->check())
-            return redirect()->route('home-signin')->withErrors('Message', 'Please sign in to access the system')->send();*/
+            return redirect()->route('home-signin')->withErrors(['message' => 'Please sign in to access the system'])->send();*/
     }
 
     // VIEWS

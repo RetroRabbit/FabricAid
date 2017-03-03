@@ -15,4 +15,9 @@ class Company extends Model
     {
         return $query->where('Active', true);
     }
+
+    public function scopeInActive($query)
+    {
+        return $query->where('Active', false);
+    }
 }

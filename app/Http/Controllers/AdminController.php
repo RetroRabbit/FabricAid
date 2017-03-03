@@ -4,19 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Company;
 use App\Role;
 use Carbon\Carbon;
 
 class AdminController extends Controller
 {
+    public function __construct()
+    {
+
+    }
+
+    public function dashboard()
+    {
+        return view('admin.dashboard')->with('title', 'Admin | Dashboard');
+    }
+
     // USERS -----------------------------------
     // VIEWS
     public function users_show()
     {
-        $users = User::active()->select(['Id', 'FirstName', 'LastName', 'Email'])->get();
-        
         return view('admin.users.show')->with('title', 'Admin | View Users')
-                                       ->with('users', $users);
+                                       ->with('users', User::select(['Id', 'FirstName', 'LastName', 'Email', 'Active'])->get());
     }
     
     public function users_create()
@@ -87,9 +96,9 @@ class AdminController extends Controller
         }
     }
 
-    public function users_delete(User $user)
+    public function users_active(User $user)
     {
-        $user->Active = false;
+        $user->Active = !$user->Active;
         $user->save();
 
         return redirect()->route('admin-users-show');
@@ -102,8 +111,8 @@ class AdminController extends Controller
     // VIEWS
     public function companies_show()
     {
-        $companies = Company::active()->get();
-        return view('admin.companies.show')->with('title', 'Admin | View Companies')->with('companies', $companies);
+        return view('admin.companies.show')->with('title', 'Admin | View Companies')
+                                           ->with('companies', Company::select(['Id', 'Code', 'Name', 'Active'])->get());
     }
 
     public function companies_update(Company $company)
@@ -140,10 +149,11 @@ class AdminController extends Controller
         }
     }
 
-    public function companies_delete(Company $company)
+    public function companies_active(Company $company)
     {
-        $company->Active = false;
+        $company->Active = !$company->Active;
         $company->save();
+        
         return redirect()->route('admin-companies-show');
     }
 
@@ -168,44 +178,11 @@ class AdminController extends Controller
     }
     // USERS -----------------------------------
 
-    public function dashboard()
-    {
-        return view('admin.dashboard')->with('title', 'Admin | Dashboard');
-    }
-
     // ROLES -----------------------------------
+    // VIEWS
     public function roles_show()
     {
         $roles = [];
-        return view('admin.roles.show')->with('title', 'Admin | View Roles')->with('roles', $roles);
-    }
-    // VIEWS
-
-    // ACTIONS
-    public function roles_update(Role $srole)
-    {
-        return redirect()->route('admin-dashboard');
-    }
-
-    public function roles_create()
-    {
-        return redirect()->route('admin-dashboard');
-    }
-    // ACTIONS
-
-    // ROLES -----------------------------------
-    public function roles_show()
-    {
-        $roles = Role::all();
-        return view('admin.roles.show')->with('title', 'Admin | View Roles')->with('roles', $roles);
-    }
-    // VIEWS
-
-    // ACTIONS
-    public function roles_u
-    public function roles_show()
-    {
-        $roles = Role::all();
         return view('admin.roles.show')->with('title', 'Admin | View Roles')->with('roles', $roles);
     }
     // VIEWS
@@ -250,4 +227,5 @@ class AdminController extends Controller
         return redirect()->route('admin-roles-show');
     }
     // ACTIONS
+    // ROLES -----------------------------------
 }

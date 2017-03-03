@@ -23,7 +23,9 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
             <p class="col-xs-1"><strong>#</strong></p>
             <p class="col-xs-4"><strong>Company Code</strong></p>
-            <p class="col-xs-7"><strong>Company Name</strong></p>
+            <p class="col-xs-5"><strong>Company Name</strong></p>
+            <p class="col-xs-1"><strong>Edit</strong></p>
+            <p class="col-xs-1"><strong>Active</strong></p>
         </div>
     </div>
 
@@ -33,8 +35,8 @@
             <p class="col-xs-1">{{ $i + 1 }}</pl>
             <p class="col-xs-4">{{ $companies[$i]->Code }}<p/>
             <p class="col-xs-5">{{ $companies[$i]->Name }}<p/>
-            <a class="col-xs-1" href="{{ route('admin-companies-update', $companies[$i]->Id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-            <a class="col-xs-1" href="{{ route('admin-companies-delete', $companies[$i]->Id) }}"><i class="fa fa-ban" aria-hidden="true"></i></a>
+            <a class="col-xs-1" style="text-align: center" href="{{ route('admin-companies-update', $companies[$i]->Id) }}"><i class="fa fa-pencil" aria-hidden="true" style="line-height: 40px;"></i></a>
+            <a class="col-xs-1" style="text-align: center" href="{{ route('admin-companies-active', $companies[$i]->Id) }}"><i class="fa {{ $companies[$i]->Active ? 'fa-circle' : 'fa-circle-o' }}" aria-hidden="true" style="line-height: 40px;"></i></a>
         </div>
         @endfor
     </div>

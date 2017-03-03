@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 
 use Validator;
 use App\User;
+use App\Role;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -43,7 +44,7 @@ class HomeController extends Controller
     // LOGIN
     public function fetch()
     {
-        $fields = ['Email' => request()->input('Email'), 'password' => request()->input('Password')];
+        $fields = ['Email' => request()->input('Email'), 'Password' => request()->input('Password')];
         $rules  = ['Email' => 'required|max:191', 'Password' => 'required|max:191'];
         $validator = validator()->make(request()->except('Submit'), $rules);
 
@@ -53,8 +54,11 @@ class HomeController extends Controller
         }
         else
         {
+            dd($fields, auth()->attempt($fields));
             //if (auth()->attempt($fields))
+            {
                 return redirect()->route('artisan-dashboard');
+            }
             /*else
                 return redirect()->back()->withInput()->withErrors(['message' => 'Sign in failed. Please check your credentials.']);*/
         }
@@ -82,7 +86,7 @@ class HomeController extends Controller
         else
         {           
             $user = User::firstOrCreate($fields);            
-            //auth()->login($user);
+            auth()->login($user);
 
             return redirect()->route('artisan-dashboard');
         }
@@ -91,7 +95,7 @@ class HomeController extends Controller
     // SIGN OUT
     public function signout()
     {
-        //auth()->logout();
+        auth()->logout();
         return redirect()->route('home-index');
     }
     // ACTIONS
