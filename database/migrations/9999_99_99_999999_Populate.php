@@ -7,6 +7,20 @@ use Illuminate\Database\Migrations\Migration;
 use App\Access;
 use App\Role;
 use App\RoleAccess;
+use App\ArtisanType;
+use App\Company;
+use App\Category;
+use App\FocusArea;
+use App\Type;
+use App\Status;
+use App\User;
+use App\Area;
+use App\Machine;
+use App\Tool;
+use App\Template;
+use App\Job;
+
+use Carbon\Carbon;
 
 class Populate extends Migration
 {
@@ -31,7 +45,7 @@ class Populate extends Migration
         $this->Machine();
         $this->Tool();
         $this->Template();
-        $this->Job();*/
+        $this->Job();
     }
 
     private function Access()
@@ -68,52 +82,57 @@ class Populate extends Migration
 
     private function ArtisanType()
     {
-        $electrician            = ArtisanType::firstOrCreate(['Name' => 'Electrician']);
-        $mechanical_engineer    = ArtisanType::firstOrCreate(['Name' => 'Mechanical Engineer']);
-        $plumber                = ArtisanType::firstOrCreate(['Name' => 'Plumber']);
+        ArtisanType::firstOrCreate(['Name' => 'Mechanic']);
+        ArtisanType::firstOrCreate(['Name' => 'Electrician']);
+        ArtisanType::firstOrCreate(['Name' => 'Enginer']);
+        ArtisanType::firstOrCreate(['Name' => 'Plumber']);
     }
 
     private function Category()
     {
-        $preventative   = Category::firstOrCreate(['Code' => 'CTG-P', 'Name' => 'Preventative']);
-        $continuous     = Category::firstOrCreate(['Code' => 'CTG-CI', 'Name' => 'Continuous Improvement']);
+        Category::firstOrCreate(['Code' => 'CTG-P',     'Name' => 'Preventative']);
+        Category::firstOrCreate(['Code' => 'CTG-CI',    'Name' => 'Continuous Improvement']);
     }
 
     private function Company()
     {
-        $jhb    = Company::firstOrCreate(
+        Company::firstOrCreate(
         [
-            'Code' => 'VT-JHB',
-            'Name' => 'Venture-Sa Johannesburg',
-            'Description' => 'The Johannesburg branch of Venture-SA'
+            'Code'          => 'VSA-JHB-01',
+            'Name'          => 'Venture-SA Gauteng, Sandton',
+            'Description'   => 'This is the main branch in South Africa',
+            'Active'        => true
         ]);
-
-        $cpt    = Company::firstOrCreate(
+    
+        Company::firstOrCreate(
         [
-            'Code' => 'VT-CPT',
-            'Name' => 'Venture-Sa Cape Town',
-            'Description' => 'The Cape Town branch of Venture-SA'
+            'Code'          => 'VSA-JHB-02',
+            'Name'          => 'Venture-SA Gauteng, Johannesburg',
+            'Description'   => 'This is the second Johannesburg branch in South Africa',
+            'Active'        => true
         ]);
-
-        $dbn    = Company::firstOrCreate(
+    
+        Company::firstOrCreate(
         [
-            'Code' => 'VT-DBN',
-            'Name' => 'Venture-Sa Durban',
-            'Description' => 'The Durban branch of Venture-SA'
+            'Code'          => 'VSA-DBN-01',
+            'Name'          => 'Venture-SA Kwa-Zulu Natal, Durban',
+            'Description'   => 'This is the Durban branch in South Africa',
+            'Active'        => true
         ]);
-
-        $ec     = Company::firstOrCreate(
+    
+        Company::firstOrCreate(
         [
-            'Code' => 'VT-EC',
-            'Name' => 'Venture-Sa Eastern Cape',
-            'Description' => 'The Eastern Cape branch of Venture-SA'
+            'Code'          => 'VSA-CPT-01',
+            'Name'          => 'Venture-SA Western Cape, Cape Town',
+            'Description'   => 'This is the Cape Town branch in South Africa',
+            'Active'        => true
         ]);
     }
 
     private function FocusArea()
     {
-        $downtime       = FocusArea::firstOrCreate(['Code' => 'FA-D', 'Name' => 'Downtime']);
-        $passperhour    = FocusArea::firstOrCreate(['Code' => 'FA-PPH', 'Name' => 'Pass Per Hour']);
+        FocusArea::firstOrCreate(['Code' => 'FA-D',   'Name' => 'Downtime']);
+        FocusArea::firstOrCreate(['Code' => 'FA-PPH', 'Name' => 'Pass Per Hour']);
     }
 
     private function Job()
@@ -131,6 +150,7 @@ class Populate extends Migration
         Role::firstOrCreate(['Name' => 'Administrator']);
         Role::firstOrCreate(['Name' => 'Supervisor']);
         Role::firstOrCreate(['Name' => 'Artisan']);
+        Role::firstOrCreate(['Name' => 'User']);
     }
 
     private function RoleAccess()
@@ -164,10 +184,10 @@ class Populate extends Migration
 
     private function Status()
     {
-        $pending    = Status::firstOrCreate(['Code' => 'ST-P', 'Name' => 'Downtime']);
-        $running    = Status::firstOrCreate(['Code' => 'ST-R', 'Name' => 'Pass Per Hour']);
-        $onhold     = Status::firstOrCreate(['Code' => 'ST-OH', 'Name' => 'Pass Per Hour']);
-        $completed  = Status::firstOrCreate(['Code' => 'ST-C', 'Name' => 'Pass Per Hour']);
+        Status::firstOrCreate(['Code' => 'ST-P',    'Name' => 'Pending']);
+        Status::firstOrCreate(['Code' => 'ST-R',    'Name' => 'Running']);
+        Status::firstOrCreate(['Code' => 'ST-OH',   'Name' => 'On-Hold']);
+        Status::firstOrCreate(['Code' => 'ST-C',    'Name' => 'Completed']);
     }
 
     private function Template()
@@ -182,13 +202,23 @@ class Populate extends Migration
 
     private function Type()
     {
-        $onetime    = Type::firstOrCreate(['Code' => 'FA-D', 'Name' => 'Downtime']);
-        $recurring  = Type::firstOrCreate(['Code' => 'FA-PPH', 'Name' => 'Pass Per Hour']);
+        Type::firstOrCreate(['Code' => 'JT-OT', 'Name' => 'One Time']);
+        Type::firstOrCreate(['Code' => 'JT-R',  'Name' => 'Recurring']);
     }
 
     private function User()
     {
-
+        User::firstOrCreate(
+        [
+            'FirstName'     =>  'Tebogo',
+            'LastName'      =>  'Seshibe',
+            'Email'         =>  'Tseshibe@gmail.com',
+            'Password'      =>  'admin',
+            'Confirmed'     =>  true,
+            'DateCreated'   =>  Carbon::now()->format('Y-m-d'),
+            'Active'        =>  true,
+            'RoleId'        =>  1
+        ]);
     }
 
     /**

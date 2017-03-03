@@ -15,7 +15,7 @@ class Access extends Migration
     {
         Schema::create('Access', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Code');
+            $table->string('Code')->unique();
             $table->string('Name');
         });
     }

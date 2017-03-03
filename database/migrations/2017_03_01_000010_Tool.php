@@ -15,7 +15,7 @@ class Tool extends Migration
     {
         Schema::create('Tool', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Code');
+            $table->string('Code')->unique();
             $table->string('Name');
             $table->text('Description')->nullable();
             $table->integer('MachineId')->unsigned();
