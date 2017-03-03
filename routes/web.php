@@ -17,6 +17,9 @@ Route::get('/',         'HomeController@index')->name('home-index');
 Route::get('/signin',   'HomeController@signin')->name('home-signin');
 Route::post('/signin',  'HomeController@fetch');
 
+Route::get('/admin/roles/show',             'AdminController@roles_show')->name('admin-roles-show');
+Route::get('/admin/roles/delete/{role}',    'AdminController@roles_delete')->name('admin-roles-delete');
+Route::post('/admin/roles/create',          'AdminController@roles_create')->name('admin-roles-create');
 Route::get('/signup',   'HomeController@signup')->name('home-signup');
 Route::post('/signup',  'HomeController@create');
 
@@ -27,9 +30,6 @@ Route::get('/signout',  'HomeController@signout')->name('home-signout');
 Route::get('/admin/dashboard',              'AdminController@dashboard')->name('admin-dashboard');
 
 // ROLES
-Route::get('/admin/roles/show',             'AdminController@roles_show')->name('admin-roles-show');
-Route::post('/admin/roles/update/{role}',   'AdminController@roles_update')->name('admin-roles-update');
-Route::post('/admin/roles/create',          'AdminController@roles_create')->name('admin-roles-create');
 // ROLES
 
 // COMAPNIES
@@ -58,3 +58,5 @@ Route::get('/artisan/history/show',      'ArtisanController@history')->name('art
 // ERROR 404
 Route::get('/{any}',    'HomeController@error404')->where('any', '.*')->name('home-error404');
 // ERROR 404
+
+Route::post('/admin/roles/update/{role}',   'AdminController@roles_update')->name('admin-roles-update');
