@@ -1,7 +1,5 @@
 <?php
 
-dd("Just to see if the request makes it here");
-
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
