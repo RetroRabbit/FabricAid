@@ -15,7 +15,7 @@
     <div id="nothing" class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
             <h1>Nothing here</h1>
-            <h3>Look like there are no companies to display</h3>
+            <h3>Looks like there are no companies to display</h3>
         </div>
     </div>
 @else

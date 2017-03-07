@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project name='FabricAid' default='Run' basedir='.' description='a demo project'>
+    <!-- PROPERTIES -->
+    <property name='message' value='Hello World!'/>
+    <property name='home.dir' value='./FabricAid'/>
+    <!-- PROPERTIES -->
+
+    <!-- ====================== -->
+    <!-- Target: Init    -->
+    <!-- ====================== -->
+    <target name='Init'>
+        <echo msg='Downloading composer...'/>
+        <exec command='curl -sS https://getcomposer.org/installer | php'/>
+        
+        <echo msg='Downloading composer...'/>
+        <exec command='mv composer.phar /usr/local/bin/composer'/>
+        
+        <echo msg='Downloading composer...'/>
+        <exec command='composer global require "laravel/installer=~1.1"'/>
+    </target>
+
+    <!-- ========================== -->
+    <!-- Target: Run the server     -->
+    <!-- ========================== -->
+    <target name="Run">
+        <exec command='php artisan serve --host=${hostip} --port={hostport}'>
+    </target>
+    <!-- TASKS -->
+</project>

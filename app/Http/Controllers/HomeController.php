@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use Validator;
 use App\User;
@@ -44,8 +45,16 @@ class HomeController extends Controller
     // LOGIN
     public function fetch()
     {
-        $fields = ['Email' => request()->input('Email'), 'Password' => request()->input('Password')];
-        $rules  = ['Email' => 'required|max:191', 'Password' => 'required|max:191'];
+        $fields =
+        [
+            'Email' => request()->input('Email'),
+            'Password' => bcrypt(request()->input('Password'))
+        ];
+        $rules  =
+        [
+            'Email' => 'required|max:191',
+            'Password' => 'required|max:191'
+        ];
         $validator = validator()->make(request()->except('Submit'), $rules);
 
         if ($validator->fails())
@@ -54,6 +63,8 @@ class HomeController extends Controller
         }
         else
         {
+            $user = User::where('Email', $fields['Email'])->first();
+            dd($user, $fields);
             dd($fields, auth()->attempt($fields));
             //if (auth()->attempt($fields))
             {

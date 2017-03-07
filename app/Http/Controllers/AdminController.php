@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Company;
 use App\Role;
+use App\Access;
+use App\RoleAccess;
 use Carbon\Carbon;
 
 class AdminController extends Controller
@@ -153,7 +155,7 @@ class AdminController extends Controller
     {
         $company->Active = !$company->Active;
         $company->save();
-        
+
         return redirect()->route('admin-companies-show');
     }
 
@@ -182,13 +184,42 @@ class AdminController extends Controller
     // VIEWS
     public function roles_show()
     {
-        $roles = [];
-        return view('admin.roles.show')->with('title', 'Admin | View Roles')->with('roles', $roles);
+        $roles = Role::all();
+        $infos = [];
+
+        for ($i = 0; $i < count($roles); ++$i)
+        {
+            $roleAccess = RoleAccess::where('RoleId', $roles[$i]->Id)->pluck('AccessId');
+            if (count($roleAccess) > 0)
+                $roleAccess = $roleAccess->toArray();
+            
+            $access = Access::find($roleAccess);
+            array_push($infos, ['Id' => $roles[$i]->Id, 'Name' => $roles[$i]->Name, 'Access' => count($access) > 0 ? $access->pluck('Code')->toArray() : []]);
+        }
+
+        //dd($infos);
+        return view('admin.roles.show')->with('title', 'Admin | View Roles')
+                                       ->with('roles', $infos);
+    }
+    
+    public function roles_create()
+    {
+        return view('admin.roles.create')->with('title', 'Admin | New Role')
+                                         ->with('accesses', Access::all());
+    }
+    
+    public function roles_update(Role $role)
+    {
+        dd(Access::where('RoleId', $role->Id));
+
+        return view('admin.roles.update')->with('title', 'Admin | Update Role')
+                                         ->with('accesses', Access::all())
+                                         ->with('role_accesses', Access::where('RoleId', $role->Id));
     }
     // VIEWS
 
     // ACTIONS
-    public function roles_update(Role $role)
+    public function roles_save(Role $role)
     {
         $validator = validator()->make(request()->only('Name'), ['Name' => 'required|unique:Role']);
         
@@ -205,17 +236,23 @@ class AdminController extends Controller
         }
     }
 
-    public function roles_create()
+    public function roles_new()
     {
         $validator = validator()->make(request()->only('Name'), ['Name' => 'required|unique:Role']);
-        
+        $accesses = request()->except('_token', 'Name', 'Submit');
+
+
         if ($validator->fails())
         {
             return redirect()->back()->withErrors($validator);
         }
         else
         {
-            Role::firstOrCreate(request()->only('Name'));
+            $role = Role::firstOrCreate(request()->only('Name'));
+            
+            foreach ($accesses as $accessId)
+                RoleAccess::firstOrCreate(['RoleId' => $role->Id, 'AccessId' => $accessId]);
+                
             return redirect()->route('admin-roles-show');
         }
     }
