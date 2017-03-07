@@ -15,7 +15,7 @@ class Machine extends Migration
     {
         Schema::create('Machine', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Code');
+            $table->string('Code')->unique();
             $table->string('Name');
             $table->integer('AreaId')->unsigned();
 

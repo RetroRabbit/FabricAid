@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+use App\Access;
 use App\Role;
+use App\RoleAccess;
 use App\ArtisanType;
 use App\Company;
 use App\Category;
@@ -18,6 +20,8 @@ use App\Tool;
 use App\Template;
 use App\Job;
 
+use Carbon\Carbon;
+
 class Populate extends Migration
 {
     /**
@@ -27,7 +31,9 @@ class Populate extends Migration
      */
     public function up()
     {
-        /*$this->Role();
+        $this->Access();
+        $this->Role();
+        $this->RoleAccess();
         $this->ArtisanType();
         $this->Company();
         $this->Category();
@@ -39,7 +45,34 @@ class Populate extends Migration
         $this->Machine();
         $this->Tool();
         $this->Template();
-        $this->Job();*/
+        $this->Job();
+    }
+
+    private function Access()
+    {
+        Access::firstOrCreate(['Code' => 'C-USR', 'Name' => 'Create User']);
+        Access::firstOrCreate(['Code' => 'U-USR', 'Name' => 'Update User']);
+        Access::firstOrCreate(['Code' => 'D-USR', 'Name' => 'Delete User']);
+    
+        Access::firstOrCreate(['Code' => 'C-RL', 'Name' => 'Create Role']);
+        Access::firstOrCreate(['Code' => 'U-RL', 'Name' => 'Update Role']);
+        Access::firstOrCreate(['Code' => 'D-RL', 'Name' => 'Delete Role']);
+    
+        Access::firstOrCreate(['Code' => 'C-CMPY', 'Name' => 'Create Company']);
+        Access::firstOrCreate(['Code' => 'U-CMPY', 'Name' => 'Update Company']);
+        Access::firstOrCreate(['Code' => 'D-CMPY', 'Name' => 'Delete Company']);
+    
+        Access::firstOrCreate(['Code' => 'C-AREA', 'Name' => 'Create Area']);
+        Access::firstOrCreate(['Code' => 'U-AREA', 'Name' => 'Update Area']);
+        Access::firstOrCreate(['Code' => 'D-AREA', 'Name' => 'Delete Area']);
+    
+        Access::firstOrCreate(['Code' => 'C-MCHN', 'Name' => 'Create Machine']);
+        Access::firstOrCreate(['Code' => 'U-MCHN', 'Name' => 'Update Machine']);
+        Access::firstOrCreate(['Code' => 'D-MCHN', 'Name' => 'Delete Machine']);
+    
+        Access::firstOrCreate(['Code' => 'C-TL', 'Name' => 'Create Tool']);
+        Access::firstOrCreate(['Code' => 'U-TL', 'Name' => 'Update Tool']);
+        Access::firstOrCreate(['Code' => 'D-TL', 'Name' => 'Delete Tool']);
     }
 
     private function Area()
@@ -49,52 +82,57 @@ class Populate extends Migration
 
     private function ArtisanType()
     {
-        $electrician            = ArtisanType::firstOrCreate(['Name' => 'Electrician']);
-        $mechanical_engineer    = ArtisanType::firstOrCreate(['Name' => 'Mechanical Engineer']);
-        $plumber                = ArtisanType::firstOrCreate(['Name' => 'Plumber']);
+        ArtisanType::firstOrCreate(['Name' => 'Mechanic']);
+        ArtisanType::firstOrCreate(['Name' => 'Electrician']);
+        ArtisanType::firstOrCreate(['Name' => 'Enginer']);
+        ArtisanType::firstOrCreate(['Name' => 'Plumber']);
     }
 
     private function Category()
     {
-        $preventative   = Category::firstOrCreate(['Code' => 'CTG-P', 'Name' => 'Preventative']);
-        $continuous     = Category::firstOrCreate(['Code' => 'CTG-CI', 'Name' => 'Continuous Improvement']);
+        Category::firstOrCreate(['Code' => 'CTG-P',     'Name' => 'Preventative']);
+        Category::firstOrCreate(['Code' => 'CTG-CI',    'Name' => 'Continuous Improvement']);
     }
 
     private function Company()
     {
-        $jhb    = Company::firstOrCreate(
+        Company::firstOrCreate(
         [
-            'Code' => 'VT-JHB',
-            'Name' => 'Venture-Sa Johannesburg',
-            'Description' => 'The Johannesburg branch of Venture-SA'
+            'Code'          => 'VSA-JHB-01',
+            'Name'          => 'Venture-SA Gauteng, Sandton',
+            'Description'   => 'This is the main branch in South Africa',
+            'Active'        => true
         ]);
-
-        $cpt    = Company::firstOrCreate(
+    
+        Company::firstOrCreate(
         [
-            'Code' => 'VT-CPT',
-            'Name' => 'Venture-Sa Cape Town',
-            'Description' => 'The Cape Town branch of Venture-SA'
+            'Code'          => 'VSA-JHB-02',
+            'Name'          => 'Venture-SA Gauteng, Johannesburg',
+            'Description'   => 'This is the second Johannesburg branch in South Africa',
+            'Active'        => true
         ]);
-
-        $dbn    = Company::firstOrCreate(
+    
+        Company::firstOrCreate(
         [
-            'Code' => 'VT-DBN',
-            'Name' => 'Venture-Sa Durban',
-            'Description' => 'The Durban branch of Venture-SA'
+            'Code'          => 'VSA-DBN-01',
+            'Name'          => 'Venture-SA Kwa-Zulu Natal, Durban',
+            'Description'   => 'This is the Durban branch in South Africa',
+            'Active'        => true
         ]);
-
-        $ec     = Company::firstOrCreate(
+    
+        Company::firstOrCreate(
         [
-            'Code' => 'VT-EC',
-            'Name' => 'Venture-Sa Eastern Cape',
-            'Description' => 'The Eastern Cape branch of Venture-SA'
+            'Code'          => 'VSA-CPT-01',
+            'Name'          => 'Venture-SA Western Cape, Cape Town',
+            'Description'   => 'This is the Cape Town branch in South Africa',
+            'Active'        => true
         ]);
     }
 
     private function FocusArea()
     {
-        $downtime       = FocusArea::firstOrCreate(['Code' => 'FA-D', 'Name' => 'Downtime']);
-        $passperhour    = FocusArea::firstOrCreate(['Code' => 'FA-PPH', 'Name' => 'Pass Per Hour']);
+        FocusArea::firstOrCreate(['Code' => 'FA-D',   'Name' => 'Downtime']);
+        FocusArea::firstOrCreate(['Code' => 'FA-PPH', 'Name' => 'Pass Per Hour']);
     }
 
     private function Job()
@@ -109,18 +147,47 @@ class Populate extends Migration
 
     private function Role()
     {
-        $admin      = Role::firstOrCreate(['Name' => 'System Administrator']);
-        $supevisor  = Role::firstOrCreate(['Name' => 'Maintenance Supervisor']);
-        $artisan    = Role::firstOrCreate(['Name' => 'Artisan']);
-        $user       = Role::firstOrCreate(['Name' => 'User']);
+        Role::firstOrCreate(['Name' => 'Administrator']);
+        Role::firstOrCreate(['Name' => 'Supervisor']);
+        Role::firstOrCreate(['Name' => 'Artisan']);
+        Role::firstOrCreate(['Name' => 'User']);
+    }
+
+    private function RoleAccess()
+    {
+        RoleAccess::firstOrCreate(['AccessId' => 1,     'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 2,     'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 3,     'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 4,     'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 5,     'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 6,     'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 7,     'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 8,     'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 9,     'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 10,    'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 11,    'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 12,    'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 13,    'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 14,    'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 15,    'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 16,    'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 17,    'RoleId' => 1]);
+        RoleAccess::firstOrCreate(['AccessId' => 18,    'RoleId' => 1]);
+        
+        RoleAccess::firstOrCreate(['AccessId' => 2,     'RoleId' => 2]);
+        RoleAccess::firstOrCreate(['AccessId' => 5,     'RoleId' => 2]);
+        RoleAccess::firstOrCreate(['AccessId' => 8,     'RoleId' => 2]);
+        RoleAccess::firstOrCreate(['AccessId' => 11,    'RoleId' => 2]);
+        RoleAccess::firstOrCreate(['AccessId' => 14,    'RoleId' => 2]);
+        RoleAccess::firstOrCreate(['AccessId' => 17,    'RoleId' => 2]);
     }
 
     private function Status()
     {
-        $pending    = Status::firstOrCreate(['Code' => 'ST-P', 'Name' => 'Downtime']);
-        $running    = Status::firstOrCreate(['Code' => 'ST-R', 'Name' => 'Pass Per Hour']);
-        $onhold     = Status::firstOrCreate(['Code' => 'ST-OH', 'Name' => 'Pass Per Hour']);
-        $completed  = Status::firstOrCreate(['Code' => 'ST-C', 'Name' => 'Pass Per Hour']);
+        Status::firstOrCreate(['Code' => 'ST-P',    'Name' => 'Pending']);
+        Status::firstOrCreate(['Code' => 'ST-R',    'Name' => 'Running']);
+        Status::firstOrCreate(['Code' => 'ST-OH',   'Name' => 'On-Hold']);
+        Status::firstOrCreate(['Code' => 'ST-C',    'Name' => 'Completed']);
     }
 
     private function Template()
@@ -135,13 +202,23 @@ class Populate extends Migration
 
     private function Type()
     {
-        $onetime    = Type::firstOrCreate(['Code' => 'FA-D', 'Name' => 'Downtime']);
-        $recurring  = Type::firstOrCreate(['Code' => 'FA-PPH', 'Name' => 'Pass Per Hour']);
+        Type::firstOrCreate(['Code' => 'JT-OT', 'Name' => 'One Time']);
+        Type::firstOrCreate(['Code' => 'JT-R',  'Name' => 'Recurring']);
     }
 
     private function User()
     {
-
+        User::firstOrCreate(
+        [
+            'FirstName'     =>  'Tebogo',
+            'LastName'      =>  'Seshibe',
+            'Email'         =>  'Tseshibe@gmail.com',
+            'Password'      =>  'admin',
+            'Confirmed'     =>  true,
+            'DateCreated'   =>  Carbon::now()->format('Y-m-d'),
+            'Active'        =>  true,
+            'RoleId'        =>  1
+        ]);
     }
 
     /**

@@ -15,7 +15,7 @@ class Template extends Migration
     {
         Schema::create('Template', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Code');
+            $table->string('Code')->unique();
             $table->string('Name');
             $table->text('Details');
             $table->boolean('Active');

@@ -15,7 +15,7 @@ class Company extends Migration
     {
         Schema::create('Company', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Code');
+            $table->string('Code')->unique();
             $table->string('Name');
             $table->text('Description')->nullable();
             $table->text('Logo')->nullable();

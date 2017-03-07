@@ -9,11 +9,11 @@ class ArtisanController extends Controller
 
     public function __construct()
     {
-        if (!auth()->check())
-            return redirect()->route('home-signin')->withErrors('Message', 'Please sign in to access the system')->send();
+        /*if (!auth()->check())
+            return redirect()->route('home-signin')->withErrors(['message' => 'Please sign in to access the system'])->send();*/
     }
 
-    // VIEWS -----------------------------------------
+    // VIEWS
     public function dashboard()
     {
         return view('artisan.dashboard')->with('title', 'Dashboard');
@@ -36,8 +36,8 @@ class ArtisanController extends Controller
         $jobs = [];
         return view('artisan.history')->with('title', 'History')->with('jobs', $jobs);
     }
-    // VIEWS -----------------------------------------
+    // VIEWS
 
-    // ACTIONS -----------------------------------------
-    // ACTIONS -----------------------------------------
+    // ACTIONS
+    // ACTIONS
 }

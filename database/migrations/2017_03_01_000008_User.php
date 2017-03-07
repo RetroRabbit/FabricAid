@@ -25,7 +25,6 @@ class User extends Migration
             $table->integer('RoleId')->unsigned()->nullable();
             $table->integer('ArtisanTypeId')->unsigned()->nullable();
             $table->integer('CompanyId')->unsigned()->nullable();
-            $table->rememberToken();
 
             $table->foreign('RoleId')->references('Id')->on('Role')->onDelete('cascade');
             $table->foreign('ArtisanTypeId')->references('Id')->on('ArtisanType')->onDelete('cascade');

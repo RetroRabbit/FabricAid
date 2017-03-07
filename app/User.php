@@ -26,4 +26,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('Active', true);
+    }
+
+    public function scopeInActive($query)
+    {
+        return $query->where('Active', false);
+    }
+
+    public function scopeOfRole($query, $roleId)
+    {
+        return $query->where('RoleId', $roleId);
+    }
 }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Role extends Migration
+class Access extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class Role extends Migration
      */
     public function up()
     {
-        Schema::create('Role', function (Blueprint $table) {            
+        Schema::create('Access', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Name')->unique();
+            $table->string('Code')->unique();
+            $table->string('Name');
         });
     }
 
@@ -26,6 +27,6 @@ class Role extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('Role');
+        Schema::dropIfExists('Access');
     }
 }

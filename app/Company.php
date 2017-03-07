@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model
 {
-    protected $table = "Company";
-    protected $primaryKey = "Id";
     public $timestamps = false;
     protected $table = 'Company';
     protected $primaryKey = 'Id';
@@ -16,5 +14,10 @@ class Company extends Model
     public function scopeActive($query)
     {
         return $query->where('Active', true);
+    }
+
+    public function scopeInActive($query)
+    {
+        return $query->where('Active', false);
     }
 }

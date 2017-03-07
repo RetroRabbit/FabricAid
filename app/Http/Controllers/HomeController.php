@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 use Validator;
 use App\User;
+use App\Role;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -16,7 +18,7 @@ class HomeController extends Controller
         return 'Email';
     }
 
-    // VIEWS -----------------------------------------
+    // VIEWS
     public function index()
     {
         return view("home.index")->with('title', 'Home');
@@ -36,15 +38,23 @@ class HomeController extends Controller
     {
         return view("home.error404")->with('title', 'Error 404');
     }
-    // VIEWS -----------------------------------------
+    // VIEWS
 
 
-    // ACTIONS -----------------------------------------
+    // ACTIONS
     // LOGIN
     public function fetch()
     {
-        $fields = ['Email' => request()->input('Email'), 'password' => request()->input('Password')];
-        $rules  = ['Email' => 'required|max:191', 'Password' => 'required|max:191'];
+        $fields =
+        [
+            'Email' => request()->input('Email'),
+            'Password' => bcrypt(request()->input('Password'))
+        ];
+        $rules  =
+        [
+            'Email' => 'required|max:191',
+            'Password' => 'required|max:191'
+        ];
         $validator = validator()->make(request()->except('Submit'), $rules);
 
         if ($validator->fails())
@@ -53,8 +63,13 @@ class HomeController extends Controller
         }
         else
         {
+            $user = User::where('Email', $fields['Email'])->first();
+            dd($user, $fields);
+            dd($fields, auth()->attempt($fields));
             //if (auth()->attempt($fields))
+            {
                 return redirect()->route('artisan-dashboard');
+            }
             /*else
                 return redirect()->back()->withInput()->withErrors(['message' => 'Sign in failed. Please check your credentials.']);*/
         }
@@ -82,7 +97,7 @@ class HomeController extends Controller
         else
         {           
             $user = User::firstOrCreate($fields);            
-            //auth()->login($user);
+            auth()->login($user);
 
             return redirect()->route('artisan-dashboard');
         }
@@ -91,8 +106,8 @@ class HomeController extends Controller
     // SIGN OUT
     public function signout()
     {
-        //auth()->logout();
+        auth()->logout();
         return redirect()->route('home-index');
     }
-    // ACTIONS -----------------------------------------
+    // ACTIONS
 }

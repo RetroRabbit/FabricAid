@@ -15,7 +15,7 @@ class Status extends Migration
     {
         Schema::create('Status', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Code');
+            $table->string('Code')->unique();
             $table->string('Name');
         });
     }

@@ -3,12 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\RoleAccess;
 
-class Role extends Model
+class RoleAccess extends Model
 {
     public $timestamps = false;
-    protected $table = 'Role';
+    protected $table = 'RoleAccess';
     protected $primaryKey = 'Id';
-    protected $fillable = ['Name'];
+    protected $fillable = ['AccessId', 'RoleId'];
 }

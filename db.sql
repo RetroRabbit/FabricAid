@@ -1,7 +1,15 @@
 -- Created by Vertabelo (http://vertabelo.com)
--- Last modification date: 2017-03-01 07:27:49.13
+-- Last modification date: 2017-03-02 13:18:01.0
 
 -- tables
+-- Table: Access
+CREATE TABLE Access (
+    Id int NOT NULL,
+    Code varchar(255) NOT NULL,
+    Name varchar(255) NOT NULL,
+    CONSTRAINT Access_pk PRIMARY KEY (Id)
+);
+
 -- Table: Area
 CREATE TABLE Area (
     Id int NOT NULL,
@@ -90,6 +98,14 @@ CREATE TABLE Role (
     CONSTRAINT Role_pk PRIMARY KEY (Id)
 );
 
+-- Table: RoleAccess
+CREATE TABLE RoleAccess (
+    Id int NOT NULL,
+    RoleId int NOT NULL,
+    AccessId int NOT NULL,
+    CONSTRAINT RoleAccess_pk PRIMARY KEY (Id)
+);
+
 -- Table: Status
 CREATE TABLE Status (
     Id int NOT NULL,
@@ -134,7 +150,7 @@ CREATE TABLE User (
     LastName varchar(255) NOT NULL,
     Email varchar(255) NOT NULL,
     Pasword varchar(255) NOT NULL,
-    Confirmed bool NOT NULL DEFAULT '0',
+    Confirmed bool NOT NULL,
     DateCreated date NOT NULL,
     Active bool NOT NULL DEFAULT '0',
     RoleId int NOT NULL,
@@ -209,6 +225,14 @@ ALTER TABLE Job ADD CONSTRAINT Machine_Job FOREIGN KEY Machine_Job (MachineId)
 ALTER TABLE Machine ADD CONSTRAINT Machine_fk0 FOREIGN KEY Machine_fk0 (AreaId)
     REFERENCES Area (Id);
 
+-- Reference: RoleAccess_Access (table: RoleAccess)
+ALTER TABLE RoleAccess ADD CONSTRAINT RoleAccess_Access FOREIGN KEY RoleAccess_Access (AccessId)
+    REFERENCES Access (Id);
+
+-- Reference: RoleAccess_Role (table: RoleAccess)
+ALTER TABLE RoleAccess ADD CONSTRAINT RoleAccess_Role FOREIGN KEY RoleAccess_Role (RoleId)
+    REFERENCES Role (Id);
+
 -- Reference: User_ArtisanType (table: User)
 ALTER TABLE User ADD CONSTRAINT User_ArtisanType FOREIGN KEY User_ArtisanType (ArtisanTypeId)
     REFERENCES ArtisanType (Id);
@@ -222,4 +246,3 @@ ALTER TABLE User ADD CONSTRAINT User_Role FOREIGN KEY User_Role (RoleId)
     REFERENCES Role (Id);
 
 -- End of file.
-
