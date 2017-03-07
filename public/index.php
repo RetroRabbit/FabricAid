@@ -1,5 +1,7 @@
 <?php
 
+dd("Just to see if the request makes it here");
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -48,8 +50,6 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 */
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
-
-dd($kernel);
 
 $response = $kernel->handle(
     $request = Illuminate\Http\Request::capture()
