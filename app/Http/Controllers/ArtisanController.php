@@ -10,7 +10,8 @@ class ArtisanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        if (!auth()->check())
+            return redirect()->route('home-signin')->send();
     }
 
     // VIEWS

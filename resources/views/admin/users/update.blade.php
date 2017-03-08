@@ -8,27 +8,27 @@
     
     <div class="row form-group">
         <label class="col-xs-12 col-sm-4" for="FirstName"><strong>First Name</strong></label>
-        <input class="col-xs-12 col-sm-8" id="FirstName" name="FirstName" type="text" value="{{ $user->FirstName }}" placeholder="John"/> 
+        <input class="col-xs-12 col-sm-8" id="FirstName" name="FirstName" type="text" value="{{ $user->FirstName }}" placeholder="First Name"/> 
     </div>
     
     <div class="row form-group">
         <label class="col-xs-12 col-sm-4" for="LastName"><strong>Last Name</strong></label>
-        <input class="col-xs-12 col-sm-8" id="LastName" name="LastName" type="text" value="{{ $user->LastName }}" placeholder="Doe"/> 
+        <input class="col-xs-12 col-sm-8" id="LastName" name="LastName" type="text" value="{{ $user->LastName }}" placeholder="Last Name"/> 
     </div>
     
     <div class="row form-group">
         <label class="col-xs-12 col-sm-4" for="Email"><strong>Email</strong></label>
-        <input class="col-xs-12 col-sm-8" id="Email" name="Email" type="email" value="{{ $user->Email }}" placeholder="jdoe@domain.com"/> 
+        <input class="col-xs-12 col-sm-8" id="Email" name="Email" type="email" value="{{ $user->Email }}" placeholder="Email"/> 
     </div>
     
     <div class="row form-group">
         <label class="col-xs-12 col-sm-4" for="Password"><strong>Password</strong></label>
-        <input class="col-xs-12 col-sm-8" id="Password" name="Password" type="text" value="{{ $user->Password }}" placeholder="somepass"/> 
+        <input class="col-xs-12 col-sm-8" id="Password" name="Password" type="text" value="{{ $user->Password }}" placeholder="Password"/> 
     </div>
     
     <div class="row form-group">
         <label class="col-xs-12 col-sm-4" for="RoleId"><strong>User Role</strong></label>
-        <select class="col-xs-12 col-sm-8" id="RoleId" name="RoleId" value="{{ $user->RoleId }}">
+        <select class="col-xs-12 col-sm-8" id="RoleId" name="Role" value="{{ $user->RoleId }}">
             <option value="">--- Please pick a role ---</option>
 
             @foreach($roles as $role)
@@ -39,7 +39,7 @@
     
     <div class="row form-group">
         <label class="col-xs-12 col-sm-4" for="ArtisanTypeId"><strong>Artisan Type</strong></label>
-        <select class="col-xs-12 col-sm-8" id="ArtisanTypeId" name="ArtisanTypeId" value="{{ $user->ArtisanTypeId }}">
+        <select class="col-xs-12 col-sm-8" id="ArtisanTypeId" name="ArtisanType" value="{{ $user->ArtisanTypeId }}">
             <option value="">--- Please pick an artisan type ---</option>
 
             @foreach($artisanTypes as $artisanType)

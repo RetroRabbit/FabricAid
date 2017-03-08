@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row subheader">
-    <h4 class="col-lg-12">Welcome s{{ $name }}</h4>
+    <h4 class="col-lg-12">Welcome {{ $name }}</h4>
 </div>
 
 <div class="row">

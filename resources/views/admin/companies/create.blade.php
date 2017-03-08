@@ -8,17 +8,17 @@
     
     <div class="row form-group">
         <label class="col-xs-12 col-sm-4" for="Code"><strong>Company Code</strong></label>
-        <input class="col-xs-12 col-sm-8" id="Code" name="Code" type="text" value="{{ old('Code') }}" placeholder="JHB-S1"/> 
+        <input class="col-xs-12 col-sm-8" id="Code" name="Code" type="text" value="{{ old('Code') }}" placeholder="Company Code"/> 
     </div>
     
     <div class="row form-group">
         <label class="col-xs-12 col-sm-4" for="Name"><strong>Company Name</strong></label>
-        <input class="col-xs-12 col-sm-8" id="Name" name="Name" type="text" value="{{ old('Name') }}" placeholder="Johanesburg Site 1"/> 
+        <input class="col-xs-12 col-sm-8" id="Name" name="Name" type="text" value="{{ old('Name') }}" placeholder="Company Name"/> 
     </div>
     
     <div class="row form-group">
         <label class="col-xs-12 col-sm-4" for="Description"><strong>Company Description</strong></label>
-        <input class="col-xs-12 col-sm-8" id="Description" name="Description" type="text" value="{{ old('Description') }}" placeholder="Description..."/> 
+        <input class="col-xs-12 col-sm-8" id="Description" name="Description" type="text" value="{{ old('Description') }}" placeholder="Company Description"/> 
     </div>
     
     <div class="row form-group">

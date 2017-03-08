@@ -8,7 +8,7 @@
     
     <div class="row form-group">
         <label class="col-xs-4" for="Name"><strong>Role Name</strong></label>
-        <input class="col-xs-8" id="Name" name="Name" type="text" value="{{ $role->Name }}" placeholder="Artisan"/> 
+        <input class="col-xs-8" id="Name" name="Name" type="text" value="{{ $role->Name }}" placeholder="Role Name"/> 
     </div>
     
     <div class="row form-group">

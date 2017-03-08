@@ -9,6 +9,8 @@ use App\Role;
 
 class AdminController extends Controller
 {
+    protected $redirectTo = '/signin';
+
     public function __construct()
     {
         $this->middleware('auth');

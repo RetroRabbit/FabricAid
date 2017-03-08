@@ -12,6 +12,11 @@ class CompanyController extends Controller
         $this->middleware('auth');
     }
 
+    public function redirectTo()
+    {
+        return redirect()->route('home-signin')->withErrors('message', 'You must be logged in to access the system.');
+    }
+
     // VIEWS
     public function companies_show()
     {

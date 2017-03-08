@@ -476,7 +476,7 @@ csmall2 {
 {
 	margin-top: 50px;
 }
-	.input-form label { color: #384452; }
+	.input-form label { color: #384452; font-size: 16px; }
 
 	.input-form input[type="text"],
 	.input-form input[type="password"],

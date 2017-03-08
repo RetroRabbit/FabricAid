@@ -15,6 +15,11 @@ class UserController extends Controller
         $this->middleware('auth');
     }
 
+    public function redirectTo()
+    {
+        return redirect()->route('home-signin')->withErrors('message', 'You must be logged in to access the system.');
+    }
+
     // VIEWS
     public function users_show()
     {
@@ -48,8 +53,8 @@ class UserController extends Controller
             'FirstName' => 'required',
             'Email' => 'required|unique:User',
             'Password' => 'required',
-            'RoleId' => 'required',
-            'ArtisanTypeId' => 'required'
+            'Role' => 'required',
+            'ArtisanType' => 'required'
         ]);
 
         if ($validator->fails())
@@ -59,8 +64,8 @@ class UserController extends Controller
         else
         {
             $user = User::firstOrNew($fields);
-            $user->RoleId = $fields['RoleId'];
-            $user->ArtisanTypeId = $fields['ArtisanTypeId'];
+            $user->RoleId = $fields['Role'];
+            $user->ArtisanTypeId = $fields['ArtisanType'];
             $user->Confirmed = true;
             $user->DateCreated = Carbon::now()->format('Y-m-d');
             $user->Active = true;
