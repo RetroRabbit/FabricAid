@@ -15,8 +15,8 @@ class Type extends Migration
     {
         Schema::create('Type', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Code')->unique();
-            $table->string('Name');
+            $table->string('Code', 255)->unique();
+            $table->string('Name', 255);
         });
     }
 

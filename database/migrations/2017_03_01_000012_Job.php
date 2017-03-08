@@ -24,7 +24,7 @@ class Job extends Migration
             $table->text('Comments');
             $table->integer('ActualHours')->unsigned();
             $table->decimal('ActualCost', 6, 2);
-            $table->text('JobDetails');
+            $table->string('JobDetails', 255);
             $table->integer('ToolId')->unsigned();
             $table->integer('MachineId')->unsigned();
             $table->integer('AreaId')->unsigned();
@@ -38,16 +38,16 @@ class Job extends Migration
             $table->integer('CompanyId')->unsigned();
 
             $table->foreign('ToolId')->references('Id')->on('Tool')->onDelete('cascade');
-            $table->foreign('MachineId')->references('Id')->on('Machine')->onDelete('cascade');
-            $table->foreign('AreaId')->references('Id')->on('Area')->onDelete('cascade');
-            $table->foreign('CreatedBy')->references('Id')->on('User')->onDelete('cascade');
-            $table->foreign('AssignedBy')->references('Id')->on('User')->onDelete('cascade');
-            $table->foreign('AssignedTo')->references('Id')->on('User')->onDelete('cascade');
+            $table->foreign('MachineId')->references('Id')->on('Machine')->onDelete('no action');
+            $table->foreign('AreaId')->references('Id')->on('Area')->onDelete('no action');
+            $table->foreign('CreatedBy')->references('Id')->on('User')->onDelete('no action');
+            $table->foreign('AssignedBy')->references('Id')->on('User')->onDelete('no action');
+            $table->foreign('AssignedTo')->references('Id')->on('User')->onDelete('no action');
             $table->foreign('TypeId')->references('Id')->on('Type')->onDelete('cascade');
-            $table->foreign('TemplateId')->references('Id')->on('Template')->onDelete('cascade');
+            $table->foreign('TemplateId')->references('Id')->on('Template')->onDelete('no action');
             $table->foreign('FocusAreaId')->references('Id')->on('FocusArea')->onDelete('cascade');
             $table->foreign('StatusId')->references('Id')->on('Status')->onDelete('cascade');
-            $table->foreign('CompanyId')->references('Id')->on('Company')->onDelete('cascade');
+            $table->foreign('CompanyId')->references('Id')->on('Company')->onDelete('no action');
         });
     }
 
