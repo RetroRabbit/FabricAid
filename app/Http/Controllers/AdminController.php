@@ -8,6 +8,7 @@ use App\Company;
 use App\Role;
 use App\Access;
 use App\RoleAccess;
+use App\ArtisanType;
 use Carbon\Carbon;
 
 class AdminController extends Controller
@@ -33,28 +34,31 @@ class AdminController extends Controller
     public function users_create()
     {
         return view('admin.users.create')->with('title', 'Admin | New User')
-                                         ->with('roles', Role::all());
+                                         ->with('roles', Role::all())
+                                         ->with('artisanTypes', ArtisanType::all());
     }
     
     public function users_update(User $user)
     {
         return view('admin.users.update')->with('title', 'Admin | Update User')
                                          ->with('user', $user)
-                                         ->with('roles', Role::all());
+                                         ->with('roles', Role::all())
+                                         ->with('artisanTypes', ArtisanType::all());
     }
     // VIEWS
 
     // ACTIONS
     public function users_new()
     {
-        $fields = request()->only('FirstName', 'LastName', 'Email', 'Password', 'RoleId');
+        $fields = request()->except('_token', 'Submit');
         $validator = validator()->make(request()->except('Submit'),
         [
             'FirstName' => 'required',
             'FirstName' => 'required',
             'Email' => 'required|unique:User',
             'Password' => 'required',
-            'RoleId' => 'required'
+            'RoleId' => 'required',
+            'ArtisanTypeId' => 'required'
         ]);
 
         if ($validator->fails())
@@ -65,6 +69,7 @@ class AdminController extends Controller
         {
             $user = User::firstOrNew($fields);
             $user->RoleId = $fields['RoleId'];
+            $user->ArtisanTypeId = $fields['ArtisanTypeId'];
             $user->Confirmed = true;
             $user->DateCreated = Carbon::now()->format('Y-m-d');
             $user->Active = true;
@@ -76,13 +81,15 @@ class AdminController extends Controller
 
     public function users_save(User $user)
     {
-        $fields = request()->only('FirstName', 'LastName', 'Email', 'Password');
+        $fields = request()->except('_token', 'Submit');
         $validator = validator()->make(request()->except('Submit'),
         [
             'FirstName' => 'required',
             'FirstName' => 'required',
-            'Email' => 'required|unique:User',
-            'Password' => 'required'
+            'Email' => 'required',
+            'Password' => 'required',
+            'RoleId' => 'required',
+            'ArtisanTypeId' => 'required'
         ]);
 
         if ($validator->fails())
@@ -92,6 +99,8 @@ class AdminController extends Controller
         else
         {
             $user->fill($fields);
+            $user->RoleId = $fields['RoleId'];
+            $user->ArtisanTypeId = $fields['ArtisanTypeId'];
             $user->save();
 
             return redirect()->route('admin-users-show');
@@ -117,51 +126,22 @@ class AdminController extends Controller
                                            ->with('companies', Company::select(['Id', 'Code', 'Name', 'Active'])->get());
     }
 
-    public function companies_update(Company $company)
-    {
-        return view('admin.companies.update')->with('title', 'Admin | Update Company')->with('company', $company);
-    }
-
     public function companies_create()
     {
         return view('admin.companies.create')->with('title', 'Admin | New Company');
     }
+
+    public function companies_update(Company $company)
+    {
+        return view('admin.companies.update')->with('title', 'Admin | Update Company')
+                                             ->with('company', $company);
+    }
     // VIEWS
     
     // ACTIONS
-    public function companies_save(Company $company)
-    {
-        $fields = request()->only('Code', 'Name', 'Description', 'Logo');
-        $validator = validator()->make(request()->except('Submit'),
-        [
-            'Code' => 'required',
-            'Name' => 'required'
-        ]);
-
-        if ($validator->fails())
-        {
-            return redirect()->back()->withInput()->withErrors($validator);
-        }
-        else
-        {
-            $company->fill(request()->only('Code', 'Name', 'Description', 'Logo'));
-            $company->save();
-
-            return redirect()->route('admin-companies-show');
-        }
-    }
-
-    public function companies_active(Company $company)
-    {
-        $company->Active = !$company->Active;
-        $company->save();
-
-        return redirect()->route('admin-companies-show');
-    }
-
     public function companies_new()
     {
-        $fields = request()->only('Code', 'Name', 'Description', 'Logo');
+        $fields = request()->except('_token', 'Submit');
         $validator = validator()->make(request()->except('Submit'),
         [
             'Code' => 'required|unique:Company',
@@ -174,9 +154,40 @@ class AdminController extends Controller
         }
         else
         {
-            Company::firstOrCreate(request()->only('Code', 'Name', 'Description', 'Logo'));
+            Company::firstOrCreate($fields);
+
             return redirect()->route('admin-companies-show');
         }
+    }
+
+    public function companies_save(Company $company)
+    {
+        $fields = request()->except('_token', 'Submit');
+        $validator = validator()->make(request()->except('Submit'),
+        [
+            'Code' => 'required',
+            'Name' => 'required'
+        ]);
+
+        if ($validator->fails())
+        {
+            return redirect()->back()->withInput()->withErrors($validator);
+        }
+        else
+        {
+            $company->fill($fields);
+            $company->save();
+
+            return redirect()->route('admin-companies-show');
+        }
+    }
+
+    public function companies_active(Company $company)
+    {
+        $company->Active = !$company->Active;
+        $company->save();
+
+        return redirect()->route('admin-companies-show');
     }
     // USERS -----------------------------------
 
@@ -197,7 +208,6 @@ class AdminController extends Controller
             array_push($infos, ['Id' => $roles[$i]->Id, 'Name' => $roles[$i]->Name, 'Access' => count($access) > 0 ? $access->pluck('Code')->toArray() : []]);
         }
 
-        //dd($infos);
         return view('admin.roles.show')->with('title', 'Admin | View Roles')
                                        ->with('roles', $infos);
     }
@@ -210,8 +220,6 @@ class AdminController extends Controller
     
     public function roles_update(Role $role)
     {
-        dd(Access::where('RoleId', $role->Id));
-
         return view('admin.roles.update')->with('title', 'Admin | Update Role')
                                          ->with('accesses', Access::all())
                                          ->with('role_accesses', Access::where('RoleId', $role->Id));
@@ -219,6 +227,26 @@ class AdminController extends Controller
     // VIEWS
 
     // ACTIONS
+    public function roles_new()
+    {
+        $accesses = request()->except('_token', 'Name', 'Submit');
+        $validator = validator()->make(request()->only('Name'), ['Name' => 'required|unique:Role']);
+
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator);
+        }
+        else
+        {
+            $role = Role::firstOrCreate(request()->only('Name'));
+            
+            foreach ($accesses as $accessId)
+                RoleAccess::firstOrCreate(['RoleId' => $role->Id, 'AccessId' => $accessId]);
+                
+            return redirect()->route('admin-roles-show');
+        }
+    }
+
     public function roles_save(Role $role)
     {
         $validator = validator()->make(request()->only('Name'), ['Name' => 'required|unique:Role']);
@@ -232,27 +260,6 @@ class AdminController extends Controller
             $role->Name = request()->input('Name');
             $role->save();
 
-            return redirect()->route('admin-roles-show');
-        }
-    }
-
-    public function roles_new()
-    {
-        $validator = validator()->make(request()->only('Name'), ['Name' => 'required|unique:Role']);
-        $accesses = request()->except('_token', 'Name', 'Submit');
-
-
-        if ($validator->fails())
-        {
-            return redirect()->back()->withErrors($validator);
-        }
-        else
-        {
-            $role = Role::firstOrCreate(request()->only('Name'));
-            
-            foreach ($accesses as $accessId)
-                RoleAccess::firstOrCreate(['RoleId' => $role->Id, 'AccessId' => $accessId]);
-                
             return redirect()->route('admin-roles-show');
         }
     }

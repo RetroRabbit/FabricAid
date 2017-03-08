@@ -32,7 +32,17 @@
             <select class="col-xs-7" id="RoleId" name="RoleId" value="{{ $user->RoleId }}">
                 <option>---</option>
                 @foreach($roles as $role)
-                <option value="{{ $role->Id }}">{{ $role->Name }}</option>
+                <option value="{{ $role->Id }}" {{ $user->RoleId == $role->Id ? 'selected' : '' }}>{{ $role->Name }}</option>
+                @endforeach
+            </select>
+        </div>
+        
+        <div class="row form-group">
+            <label for="RoleId" class="col-xs-5"><strong>Artisan Type</strong></label>
+            <select class="col-xs-7" id="ArtisanTypeId" name="ArtisanTypeId" value="{{ $user->ArtisanTypeId }}">
+                <option>---</option>
+                @foreach($artisanTypes as $artisanType)
+                <option value="{{ $artisanType->Id }}" {{ $user->ArtisanTypeId == $artisanType->Id ? 'selected' : '' }}>{{ $artisanType->Name }}</option>
                 @endforeach
             </select>
         </div>

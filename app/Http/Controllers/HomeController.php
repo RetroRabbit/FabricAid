@@ -42,14 +42,35 @@ class HomeController extends Controller
 
 
     // ACTIONS
-    // LOGIN
+    public function create()
+    {
+        $fields = request()->except('_token', 'Submit');
+        $fields['DateCreated'] = Carbon::now()->format('Y-m-d');
+        $rules =
+        [
+            'FirstName'     => 'required|max:191',
+            'LastName'      => 'required|max:191',
+            'Email'         => 'required|max:191|unique:User',
+            'Password'      => 'required|max:191|confirmed'
+        ];
+        $validator = validator()->make(request()->except('Submit'), $rules);
+
+        if ($validator->fails())
+        {
+            return redirect()->back()->withErrors($validator);
+        }
+        else
+        {           
+            $user = User::firstOrCreate($fields);            
+            auth()->login($user);
+
+            return redirect()->route('artisan-dashboard');
+        }
+    }
+    
     public function fetch()
     {
-        $fields =
-        [
-            'Email' => request()->input('Email'),
-            'Password' => bcrypt(request()->input('Password'))
-        ];
+        $fields = request()->except('_token', 'Password');
         $rules  =
         [
             'Email' => 'required|max:191',
@@ -75,38 +96,10 @@ class HomeController extends Controller
         }
     }
 
-    // REGISTER
-    public function create()
-    {
-        $fields = request()->only('FirstName', 'LastName', 'Email', 'Password');
-        $fields['DateCreated'] = Carbon::now()->format('Y-m-d');
-        $rules =
-        [
-            'FirstName'     => 'required|max:191',
-            'LastName'      => 'required|max:191',
-            'Email'         => 'required|max:191|unique:User',
-            'Password'      => 'required|max:191|confirmed',
-        ];
-
-        $validator = validator()->make(request()->except('Submit'), $rules);
-
-        if ($validator->fails())
-        {
-            return redirect()->back()->withErrors($validator);
-        }
-        else
-        {           
-            $user = User::firstOrCreate($fields);            
-            auth()->login($user);
-
-            return redirect()->route('artisan-dashboard');
-        }
-    }
-
-    // SIGN OUT
     public function signout()
     {
         auth()->logout();
+
         return redirect()->route('home-index');
     }
     // ACTIONS

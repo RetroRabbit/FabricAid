@@ -16,25 +16,25 @@ class ArtisanController extends Controller
     // VIEWS
     public function dashboard()
     {
-        return view('artisan.dashboard')->with('title', 'Dashboard');
+        return view('artisan.dashboard')->with('title', 'Artisan | Dashboard');
     }
 
     public function requests()
     {
-        $jobs = [];
-        return view('artisan.requests')->with('title', 'Requests')->with('jobs', $jobs);
+        return view('artisan.requests')->with('title', 'Artisan | Requests')
+                                       ->with('requests', []);
     }
 
     public function jobs()
     {
-        $jobs = [];
-        return view('artisan.jobs')->with('title', 'Jobs')->with('jobs', $jobs);
+        return view('artisan.jobs')->with('title', 'Artisan | Jobs')
+                                   ->with('jobs', []);
     }
 
     public function history()
     {
-        $jobs = [];
-        return view('artisan.history')->with('title', 'History')->with('jobs', $jobs);
+        return view('artisan.history')->with('title', 'Artisan | History')
+                                      ->with('histories', []);
     }
     // VIEWS
 

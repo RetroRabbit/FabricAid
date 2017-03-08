@@ -30,9 +30,17 @@
         <div class="row form-group">
             <label for="RoleId" class="col-xs-5"><strong>User Role</strong></label>
             <select class="col-xs-7" id="RoleId" name="RoleId">
-                <option>---</option>
                 @foreach($roles as $role)
                 <option value="{{ $role->Id }}">{{ $role->Name }}</option>
+                @endforeach
+            </select>
+        </div>
+        
+        <div class="row form-group">
+            <label for="RoleId" class="col-xs-5"><strong>Arrtisan Type</strong></label>
+            <select class="col-xs-7" id="RoleId" name="RoleId">
+                @foreach($artisanTypes as $artisanType)
+                <option value="{{ $artisanType->Id }}">{{ $artisanType->Name }}</option>
                 @endforeach
             </select>
         </div>
