@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Seeder;
 
 use App\Access;
 use App\Role;
@@ -22,14 +20,14 @@ use App\Job;
 
 use Carbon\Carbon;
 
-class Populate extends Migration
+class DatabaseSeeder extends Seeder
 {
     /**
-     * Run the migrations.
+     * Run the database seeds.
      *
      * @return void
      */
-    public function up()
+    public function run()
     {
         $this->Access();
         $this->Role();
@@ -219,15 +217,5 @@ class Populate extends Migration
             'Active'        =>  true,
             'RoleId'        =>  1
         ]);
-    }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //
     }
 }
