@@ -8,11 +8,9 @@ use App\Job;
 
 class ArtisanController extends Controller
 {
-
     public function __construct()
     {
-        /*if (!auth()->check())
-            return redirect()->route('home-signin')->withErrors(['message' => 'Please sign in to access the system'])->send();*/
+        $this->middleware('auth');
     }
 
     // VIEWS

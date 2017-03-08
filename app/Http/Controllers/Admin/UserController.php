@@ -10,6 +10,11 @@ use Carbon\Carbon;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // VIEWS
     public function users_show()
     {

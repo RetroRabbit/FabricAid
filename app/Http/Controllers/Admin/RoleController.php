@@ -9,6 +9,11 @@ use App\RoleAccess;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // VIEWS
     public function roles_show()
     {

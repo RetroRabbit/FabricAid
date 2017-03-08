@@ -11,7 +11,7 @@ class AdminController extends Controller
 {
     public function __construct()
     {
-        // middleware authentication
+        $this->middleware('auth');
     }
 
     public function dashboard()

@@ -7,6 +7,11 @@ use App\Company;
 
 class CompanyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     // VIEWS
     public function companies_show()
     {
