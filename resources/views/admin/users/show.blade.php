@@ -22,10 +22,10 @@
     <div id="table-header" class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
             <p class="hidden-xs col-sm-1"><strong>#</strong></p>
-            <p class="col-xs-4"><strong>Name</strong></p>
-            <p class="col-xs-5"><strong>Email</strong></p>
-            <p class="col-xs-1"><strong>Edit</strong></p>
-            <p class="col-xs-1"><strong>Active</strong></p>
+            <p class="col-xs-4 col-sm-4"><strong>Name</strong></p>
+            <p class="col-xs-5 col-sm-5"><strong>Email</strong></p>
+            <p class="col-xs-1 col-sm-1"><strong>Edit</strong></p>
+            <p class="col-xs-1 col-sm-1"><strong>Active</strong></p>
         </div>
     </div>
 

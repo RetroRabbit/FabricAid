@@ -27,37 +27,37 @@ Route::get('/signout',  'HomeController@signout')->name('home-signout');
 Route::get('/admin/dashboard',              'AdminController@dashboard')->name('admin-dashboard');
 
 // USERS
-Route::get('/admin/users/show',             'AdminController@users_show')->name('admin-users-show');
+Route::get('/admin/users/show',             'UserController@users_show')->name('admin-users-show');
 
-Route::get('/admin/users/create',           'AdminController@users_create')->name('admin-users-create');
-Route::post('/admin/users/create',          'AdminController@users_new'); 
+Route::get('/admin/users/create',           'UserController@users_create')->name('admin-users-create');
+Route::post('/admin/users/create',          'UserController@users_new'); 
 
-Route::get('/admin/users/update/{user}',    'AdminController@users_update')->name('admin-users-update');
-Route::post('/admin/users/update/{user}',   'AdminController@users_save'); 
+Route::get('/admin/users/update/{user}',    'UserController@users_update')->name('admin-users-update');
+Route::post('/admin/users/update/{user}',   'UserController@users_save'); 
 
-Route::get('/admin/users/active/{user}',    'AdminController@users_active')->name('admin-users-active'); 
+Route::get('/admin/users/active/{user}',    'UserController@users_active')->name('admin-users-active'); 
 // USERS
 
 // ROLES
-Route::get('/admin/roles/show',             'AdminController@roles_show')->name('admin-roles-show');
+Route::get('/admin/roles/show',             'RoleController@roles_show')->name('admin-roles-show');
 
-Route::get('/admin/roles/create',           'AdminController@roles_create')->name('admin-roles-create');
-Route::post('/admin/roles/create',          'AdminController@roles_new');
+Route::get('/admin/roles/create',           'RoleController@roles_create')->name('admin-roles-create');
+Route::post('/admin/roles/create',          'RoleController@roles_new');
 
-Route::get('/admin/roles/update/{role}',    'AdminController@roles_update')->name('admin-roles-update');
-Route::post('/admin/roles/update/{role}',   'AdminController@roles_save');
+Route::get('/admin/roles/update/{role}',    'RoleController@roles_update')->name('admin-roles-update');
+Route::post('/admin/roles/update/{role}',   'RoleController@roles_save');
 // ROLES
 
 // COMAPNIES
-Route::get('/admin/companies/show',                 'AdminController@companies_show')->name('admin-companies-show');
+Route::get('/admin/companies/show',                 'CompanyController@companies_show')->name('admin-companies-show');
 
-Route::get('/admin/companies/create',               'AdminController@companies_create')->name('admin-companies-create');
-Route::post('/admin/companies/create',              'AdminController@companies_new'); 
+Route::get('/admin/companies/create',               'CompanyController@companies_create')->name('admin-companies-create');
+Route::post('/admin/companies/create',              'CompanyController@companies_new'); 
 
-Route::get('/admin/companies/update/{company}',     'AdminController@companies_update')->name('admin-companies-update');
-Route::post('/admin/companies/update/{company}',    'AdminController@companies_save'); 
+Route::get('/admin/companies/update/{company}',     'CompanyController@companies_update')->name('admin-companies-update');
+Route::post('/admin/companies/update/{company}',    'CompanyController@companies_save'); 
 
-Route::get('/admin/companies/active/{company}',     'AdminController@companies_active')->name('admin-companies-active'); 
+Route::get('/admin/companies/active/{company}',     'CompanyController@companies_active')->name('admin-companies-active'); 
 // COMAPNIES
 // ADMIN ---------------------------------------------------------------------------------------------------------------
 

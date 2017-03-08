@@ -1,0 +1,25 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\User;
+use App\Company;
+use App\Role;
+
+class AdminController extends Controller
+{
+    public function __construct()
+    {
+        // middleware authentication
+    }
+
+    public function dashboard()
+    {
+        return view('admin.dashboard')->with('title', 'Admin | Dashboard')
+                                      ->with('name', 'Administrator')
+                                      ->with('users', count(User::all()))
+                                      ->with('companies', count(Company::all()))
+                                      ->with('roles', count(Role::all()));
+    }
+}

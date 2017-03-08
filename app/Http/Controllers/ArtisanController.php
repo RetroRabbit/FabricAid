@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Job;
+
 class ArtisanController extends Controller
 {
 
@@ -16,7 +18,11 @@ class ArtisanController extends Controller
     // VIEWS
     public function dashboard()
     {
-        return view('artisan.dashboard')->with('title', 'Artisan | Dashboard');
+        return view('artisan.dashboard')->with('title', 'Artisan | Dashboard')
+                                        ->with('name', 'Artisan')
+                                        ->with('jobs', count(Job::all()))
+                                        ->with('requests', count(Job::all()))
+                                        ->with('history', count(Job::all()));
     }
 
     public function requests()

@@ -458,3 +458,51 @@ csmall2 {
 	padding-right: 15px;
 	font-size: 18px;
 }
+
+
+/*	################################################################
+	GENERAL STYLING
+################################################################# */
+
+.subheader
+{
+	padding-top: 50px;
+	margin-top: -50px;
+	background: #00b3fe;
+	color: white;
+}
+
+.input-form
+{
+	margin-top: 50px;
+}
+	.input-form label { color: #384452; }
+
+	.input-form input[type="text"],
+	.input-form input[type="password"],
+	.input-form input[type="email"],
+	.input-form select
+	{
+		outline: none;
+		border: 0;
+		height: 35px;
+		border-radius: 5px;
+		border: solid 1px #384452;
+	}
+	.input-form input[type="text"]:focus,
+	.input-form input[type="password"]:focus,
+	.input-form input[type="email"]:focus
+	{
+		border-color: #00b3fe;
+	}
+
+	.input-form input[type="button"],
+	.input-form input[type="submit"]
+	{
+		border: 0;
+		color: white;
+		font-weight: bold;
+		background: #00b3fe;
+		height: 35px;
+		border-radius: 5px;
+	}
