@@ -15,8 +15,8 @@ class FocusArea extends Migration
     {
         Schema::create('FocusArea', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Code')->unique();
-            $table->string('Name');
+            $table->string('Code', 255)->unique();
+            $table->string('Name', 255);
         });
     }
 

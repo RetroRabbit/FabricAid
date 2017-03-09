@@ -15,10 +15,10 @@ class Company extends Migration
     {
         Schema::create('Company', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Code')->unique();
-            $table->string('Name');
+            $table->string('Code', 255)->unique();
+            $table->string('Name', 255);
             $table->text('Description')->nullable();
-            $table->text('Logo')->nullable();
+            $table->string('Logo', 'max')->nullable();
             $table->boolean('Active')->default(true);
         });
     }

@@ -21,7 +21,7 @@
 @else
     <div id="table-header" class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
-            <p class="col-xs-1"><strong>#</strong></p>
+            <p class="hidden-xs col-sm-1"><strong>#</strong></p>
             <p class="col-xs-4"><strong>Role Name</strong></p>
             <p class="col-xs-6"><strong>Permissions</strong></p>
             <p class="col-xs-1"><strong>Edit</strong></p>
@@ -31,7 +31,7 @@
     <div id="table-body" class="row">
         @for($i = 0; $i < count($roles); ++$i)
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
-            <p class="col-xs-1">{{ $i + 1 }}</pl>
+            <p class="hidden-xs col-sm-1">{{ $i + 1 }}</pl>
             <p class="col-xs-4">{{ $roles[$i]['Name'] }}</p>
             <div class="col-xs-6" style="overflow-y: auto;">
                 @if (count($roles[$i]['Access']) == 0)

@@ -15,7 +15,7 @@ class ArtisanType extends Migration
     {
         Schema::create('ArtisanType', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Name');
+            $table->string('Name', 255);
         });
     }
 

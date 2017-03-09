@@ -15,8 +15,8 @@ class Machine extends Migration
     {
         Schema::create('Machine', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Code')->unique();
-            $table->string('Name');
+            $table->string('Code', 255)->unique();
+            $table->string('Name', 255);
             $table->integer('AreaId')->unsigned();
 
             $table->foreign('AreaId')->references('Id')->on('Area')->onDelete('cascade');

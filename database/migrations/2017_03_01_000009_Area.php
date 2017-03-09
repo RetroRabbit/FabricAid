@@ -15,9 +15,9 @@ class Area extends Migration
     {
         Schema::create('Area', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('Code')->unique();
-            $table->string('Name');
-            $table->string('Location')->nullable();
+            $table->string('Code', 255)->unique();
+            $table->string('Name', 255);
+            $table->string('Location', 255)->nullable();
             $table->integer('CompanyId')->unsigned();
 
             $table->foreign('CompanyId')->references('Id')->on('Company')->onDelete('cascade');

@@ -15,16 +15,19 @@ class User extends Migration
     {
         Schema::create('User', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->string('FirstName');
-            $table->string('LastName');
-            $table->string('Email')->unique();
-            $table->string('Password');
+            $table->string('FirstName', 255);
+            $table->string('LastName', 255);
+            $table->string('Email', 255)->unique();
+            $table->string('Password', 255);
             $table->boolean('Confirmed')->default(false);
             $table->date('DateCreated');
             $table->boolean('Active')->default(false);
             $table->integer('RoleId')->unsigned()->nullable();
             $table->integer('ArtisanTypeId')->unsigned()->nullable();
             $table->integer('CompanyId')->unsigned()->nullable();
+            
+            $table->string('remember_token', 100)->nullable();
+            $table->timestamps();
 
             $table->foreign('RoleId')->references('Id')->on('Role')->onDelete('cascade');
             $table->foreign('ArtisanTypeId')->references('Id')->on('ArtisanType')->onDelete('cascade');

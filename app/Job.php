@@ -10,4 +10,19 @@ class Job extends Model
     protected $table = 'Job';
     protected $primaryKey = 'Id';
     protected $fillable = ['Priority', 'DateCreated', 'PlannedStartDate', 'PlannedCompletionDate', 'PlannedHours', 'EstimatedCost', 'ActualHours', 'ActualCost', 'JobDetails'];
+
+    public function scopeHistory($query)
+    {
+        return $query;
+    }
+
+    public function scopeRequest($query)
+    {
+        return $query;
+    }
+
+    public function scopeActive($query)
+    {
+        return $query;
+    }
 }
