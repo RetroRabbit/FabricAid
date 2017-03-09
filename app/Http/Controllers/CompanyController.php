@@ -21,17 +21,20 @@ class CompanyController extends Controller
     public function companies_show()
     {
         return view('admin.companies.show')->with('title', 'Admin | View Companies')
+                                           ->with('header', 'Company List')
                                            ->with('companies', Company::select(['Id', 'Code', 'Name', 'Active'])->get());
     }
 
     public function companies_create()
     {
-        return view('admin.companies.create')->with('title', 'Admin | New Company');
+        return view('admin.companies.create')->with('title', 'Admin | New Company')
+                                             ->with('header', 'Create New Company');
     }
 
     public function companies_update(Company $company)
     {
         return view('admin.companies.update')->with('title', 'Admin | Update Company')
+                                             ->with('header', 'Update Company Details')
                                              ->with('company', $company);
     }
     // VIEWS

@@ -13,18 +13,21 @@ class MachineController extends Controller
     public function machines_show()
     {
         return view('admin.machines.show')->with('title', 'Admin | Machine')
+                                          ->with('header', 'Machine List')
                                           ->with('machines', Machine::all());
     }
     
     public function machines_create()
     {
         return view('admin.machines.create')->with('title', 'Admin | Create Machine')
+                                            ->with('header', 'Create New Machine')
                                             ->with('areas', Area::all());
     }
     
     public function machines_update(Machine $machine)
     {
         return view('admin.machines.update')->with('title', 'Admin | Create Machine')
+                                            ->with('header', 'Update Machine Details')
                                             ->with('machine', $machine)
                                             ->with('areas', Area::all());
     }

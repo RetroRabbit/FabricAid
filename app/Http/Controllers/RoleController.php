@@ -36,18 +36,21 @@ class RoleController extends Controller
         }
 
         return view('admin.roles.show')->with('title', 'Admin | View Roles')
+                                       ->with('header', 'Role List')
                                        ->with('roles', $infos);
     }
     
     public function roles_create()
     {
         return view('admin.roles.create')->with('title', 'Admin | New Role')
+                                         ->with('header', 'Create New Role')
                                          ->with('accesses', Access::all());
     }
     
     public function roles_update(Role $role)
     {
         return view('admin.roles.update')->with('title', 'Admin | Update Role')
+                                         ->with('header', 'Update Role Details')
                                          ->with('role', $role)
                                          ->with('accesses', Access::all())
                                          ->with('role_accesses', RoleAccess::where('RoleId', $role->Id)->get()->pluck('AccessId')->toArray());

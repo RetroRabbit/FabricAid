@@ -24,12 +24,14 @@ class UserController extends Controller
     public function users_show()
     {
         return view('admin.users.show')->with('title', 'Admin | View Users')
+                                       ->with('header', 'User List')
                                        ->with('users', User::select(['Id', 'FirstName', 'LastName', 'Email', 'Active'])->get());
     }
     
     public function users_create()
     {
         return view('admin.users.create')->with('title', 'Admin | New User')
+                                         ->with('header', 'Create New User')
                                          ->with('roles', Role::all())
                                          ->with('artisanTypes', ArtisanType::all());
     }
@@ -37,6 +39,7 @@ class UserController extends Controller
     public function users_update(User $user)
     {
         return view('admin.users.update')->with('title', 'Admin | Update User')
+                                         ->with('header', 'Update User Details')
                                          ->with('user', $user)
                                          ->with('roles', Role::all())
                                          ->with('artisanTypes', ArtisanType::all());
