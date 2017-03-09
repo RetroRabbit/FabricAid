@@ -1,9 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-@include('layouts.errors')
-
-<div class="container" style="margin-top: 100px;">
+<div class="container">
     <div id="table-create" class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
             <a class="col-xs-2 col-lg-offset-1 btn btn-success" href="{{ route('admin-tools-create') }}">
@@ -36,7 +34,7 @@
             <p class="hidden-xs col-sm-1">{{ $i + 1 }}</p>
             <p class="col-xs-4">{{ $tools[$i]->Code }}</p>
             <p class="col-xs-6">{{ $tools[$i]->Name }}</p>
-            <a class="col-xs-1" style="text-align: center" href="{{ route('admin-tools-update', $tools[$i]->Id) }}"><i class="fa fa-pencil" aria-hidden="true" style="line-height: 40px;"></i></a>
+            <a class="col-xs-1" style="text-align: center; color: #384452;" href="{{ route('admin-tools-update', $tools[$i]->Id) }}"><i class="fa fa-pencil" aria-hidden="true" style="line-height: 40px;"></i></a>
         </div>
         @endfor
     </div>

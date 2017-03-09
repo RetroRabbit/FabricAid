@@ -1,7 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-<form method="post" class="input-form col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
+<form method="post" class="input-form col-xs-12 col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
     @include('layouts.errors')
 
     {{ csrf_field() }}
@@ -31,6 +31,9 @@
             @endforeach
         </select>
     </div>
-    <input class="col-xs-6 col-xs-offset-3 col-md-4 col-md-offset-0" type="submit" name="Submit" value="Create" />
+    
+    <div class="form-group row">
+        <input class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4" id="Submit" name="Submit" type="submit" value="Create" />
+    </div>
 </form>
 @endsection

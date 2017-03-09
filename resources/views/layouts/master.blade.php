@@ -14,7 +14,7 @@
     </head>
 
     <body>
-        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="navbar navbar-default navbar-fixed-top {{{ (Request::is('/') ? 'home' : null) }}}" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -35,8 +35,14 @@
             </div>
         </div>
         
-        <div class="container-fluid" style="margin-top: 100px">
-        @yield('content')
+        <div class="subheader">
+            <div class="container">
+                <h1>{{ $header }}</h1>
+            </div>
+        </div>
+
+        <div class="container-fluid" style="background: white; padding-top: 50px;">            
+            @yield('content')
         </div>
 
         @include('includes.scripts')
