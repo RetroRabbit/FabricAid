@@ -53,7 +53,7 @@ class HomeController extends Controller
     // ACTIONS
     public function create()
     {
-        $fields = request()->except('_token', 'Submit');
+        $fields = request()->except('_token', 'Password_confirmation', 'Submit');
         $fields['DateCreated'] = Carbon::now()->format('Y-m-d');
         $rules =
         [

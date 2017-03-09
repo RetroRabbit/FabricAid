@@ -1,13 +1,13 @@
 @extends('artisan.layout')
 
 @section('content')
-@if(count($histories) == 0)
-@include('artisan.empty')
+@if(count($history) == 0)
+    @include('artisan.empty')
 @else
-<div id="job-list">
-    @foreach($histories as $history)
-        {{ $history }}
-    @endforeach
-</div>
+    <div id="job-list">
+        @foreach($history as $job)
+            {{ $job }}
+        @endforeach
+    </div>
 @endif
 @endsection

@@ -62,10 +62,20 @@ Route::get('/admin/companies/active/{company}',     'CompanyController@companies
 // ADMIN ---------------------------------------------------------------------------------------------------------------
 
 // ARTISAN -------------------------------------------------------------------------------------------------------------
-Route::get('/artisan/dashboard',        'ArtisanController@dashboard')->name('artisan-dashboard');
-Route::get('/artisan/requests/show',    'ArtisanController@requests')->name('artisan-requests');
-Route::get('/artisan/jobs/show',        'ArtisanController@jobs')->name('artisan-jobs');
-Route::get('/artisan/history/show',     'ArtisanController@history')->name('artisan-history');
+Route::get('/artisan/dashboard',            'ArtisanController@dashboard')->name('artisan-dashboard');
+
+// REUQEST
+Route::get('/artisan/requests/create',      'RequestController@create')->name('artisan-requests-create');
+Route::get('/artisan/requests/show',        'RequestController@show')->name('artisan-requests-show');
+
+Route::post('/artisan/requests/create',      'RequestController@store')->name('artisan-requests-show');
+
+// JOBS
+Route::get('/artisan/jobs/show',            'JobController@show')->name('artisan-jobs-show');
+Route::get('/artisan/jobs/update/{job}',    'JobController@update')->name('artisan-jobs-update');
+
+// HISTORY
+Route::get('/artisan/history/show',         'HistoryController@show')->name('artisan-history-show');
 // ARTISAN -------------------------------------------------------------------------------------------------------------
 
 // ERROR 404 -----------------------------------------------------------------------------------------------------------

@@ -46,7 +46,7 @@ class UserController extends Controller
     // ACTIONS
     public function users_new()
     {
-        $fields = request()->except('_token', 'Submit');
+        $fields = request()->except('_token', 'Role', 'ArtisanType', 'Submit');
         $validator = validator()->make(request()->except('Submit'),
         [
             'FirstName' => 'required',
@@ -64,8 +64,8 @@ class UserController extends Controller
         else
         {
             $user = User::firstOrNew($fields);
-            $user->RoleId = $fields['Role'];
-            $user->ArtisanTypeId = $fields['ArtisanType'];
+            $user->RoleId = request()->input('Role');
+            $user->ArtisanTypeId = request()->input('ArtisanType');
             $user->Confirmed = true;
             $user->DateCreated = Carbon::now()->format('Y-m-d');
             $user->Active = true;
@@ -77,15 +77,15 @@ class UserController extends Controller
 
     public function users_save(User $user)
     {
-        $fields = request()->except('_token', 'Submit');
+        $fields = request()->except('_token', 'Role', 'ArtisanType', 'Submit');
         $validator = validator()->make(request()->except('Submit'),
         [
             'FirstName' => 'required',
             'FirstName' => 'required',
             'Email' => 'required',
-            'Password' => 'required',
-            'RoleId' => 'required',
-            'ArtisanTypeId' => 'required'
+            'Password' => 'required|confirmation',
+            'Role' => 'required',
+            'ArtisanType' => 'required'
         ]);
 
         if ($validator->fails())
@@ -95,8 +95,8 @@ class UserController extends Controller
         else
         {
             $user->fill($fields);
-            $user->RoleId = $fields['RoleId'];
-            $user->ArtisanTypeId = $fields['ArtisanTypeId'];
+            $user->RoleId = request()->input('Role');
+            $user->ArtisanTypeId = request()->input('ArtisanType');
             $user->save();
 
             return redirect()->route('admin-users-show');

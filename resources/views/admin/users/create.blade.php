@@ -27,8 +27,8 @@
     </div>
     
     <div class="row form-group">
-        <label class="col-xs-12 col-sm-4" for="RoleId"><strong>User Role</strong></label>
-        <select class="col-xs-12 col-sm-8" id="RoleId" name="Role" value="{{ old('RoleId') }}">
+        <label class="col-xs-12 col-sm-4" for="Role"><strong>User Role</strong></label>
+        <select class="col-xs-12 col-sm-8" id="Role" name="Role" value="{{ old('Role') }}">
             <option value="">--- Please pick a role ---</option>
 
             @foreach($roles as $role)
@@ -38,8 +38,8 @@
     </div>
     
     <div class="row form-group">
-        <label class="col-xs-12 col-sm-4" for="ArtisanTypeId"><strong>Artisan Type</strong></label>
-        <select class="col-xs-12 col-sm-8" id="ArtisanTypeId" name="ArtisanType" value="{{ old('ArtisanTypeId') }}">
+        <label class="col-xs-12 col-sm-4" for="ArtisanType"><strong>Artisan Type</strong></label>
+        <select class="col-xs-12 col-sm-8" id="ArtisanType" name="ArtisanType" value="{{ old('ArtisanType') }}">
             <option value="">--- Please pick an artisan type ---</option>
 
             @foreach($artisanTypes as $artisanType)

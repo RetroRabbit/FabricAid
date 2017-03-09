@@ -217,5 +217,17 @@ class DatabaseSeeder extends Seeder
             'Active'        =>  true,
             'RoleId'        =>  1
         ]);
+    
+        User::firstOrCreate(
+        [
+            'FirstName'     =>  'Jack',
+            'LastName'      =>  'Dawson',
+            'Email'         =>  'JDawson@gmail.com',
+            'Password'      =>  'artisan',
+            'Confirmed'     =>  true,
+            'DateCreated'   =>  Carbon::now()->format('Y-m-d'),
+            'Active'        =>  true,
+            'RoleId'        =>  3
+        ]);
     }
 }

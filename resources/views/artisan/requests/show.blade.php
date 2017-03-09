@@ -1,13 +1,13 @@
 @extends('artisan.layout')
 
-@section('content-body')
+@section('content')
 @if(count($requests) == 0)
-@include('artisan.empty')
+    @include('artisan.empty')
 @else
-<div id="job-list">
-    @foreach($requests as $request)
-        {{ $request }}
-    @endforeach
-</div>
+    <div id="job-list">
+        @foreach($requests as $job)
+            {{ $job }}
+        @endforeach
+    </div>
 @endif
 @endsection
