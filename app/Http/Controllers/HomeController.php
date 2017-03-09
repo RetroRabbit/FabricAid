@@ -66,7 +66,7 @@ class HomeController extends Controller
 
         if ($validator->fails())
         {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withInput(request()->only('FirstName', 'LastName', 'Email'))->withErrors($validator);
         }
         else
         {
@@ -95,7 +95,7 @@ class HomeController extends Controller
             if (auth()->attempt($fields))
                 return $this->gotoDashboard();
             else
-                return redirect()->back()->withErrors('message', 'Login failed. Please check your credentials.');
+                return redirect()->back()->withInput(request()->only('Email'))->withErrors(['Find' => 'Could not a user with those credentials. Please confirm and try again.']);
         }
     }
 

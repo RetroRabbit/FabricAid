@@ -23,12 +23,12 @@
     
     <div class="row form-group">
         <label class="col-xs-12 col-sm-4" for="Password"><strong>New Password</strong></label>
-        <input class="col-xs-12 col-sm-8" id="Password" name="Password" type="Password" value="********" placeholder="Password"/> 
+        <input class="col-xs-12 col-sm-8" id="Password" name="Password" type="Password" placeholder="Password"/> 
     </div>
     
     <div class="row form-group">
         <label class="col-xs-12 col-sm-4" for="Password_confirmation"><strong>Confirm New Password</strong></label>
-        <input class="col-xs-12 col-sm-8" id="Password_confirmation" name="Password_confirmation" type="Password" value="********" placeholder="Password"/> 
+        <input class="col-xs-12 col-sm-8" id="Password_confirmation" name="Password_confirmation" type="Password" placeholder="Password"/> 
     </div>
     
     <div class="row form-group">

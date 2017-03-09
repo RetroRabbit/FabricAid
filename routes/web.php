@@ -48,6 +48,36 @@ Route::get('/admin/roles/update/{role}',    'RoleController@roles_update')->name
 Route::post('/admin/roles/update/{role}',   'RoleController@roles_save');
 // ROLES
 
+// AREAS
+Route::get('/admin/areas/show',             'AreaController@areas_show')->name('admin-areas-show');
+
+Route::get('/admin/areas/create',           'AreaController@areas_create')->name('admin-areas-create');
+Route::post('/admin/areas/create',          'AreaController@areas_new');
+
+Route::get('/admin/areas/update/{area}',    'AreaController@areas_update')->name('admin-areas-update');
+Route::post('/admin/areas/update/{area}',   'AreaController@areas_save');
+// AREAS
+
+// MACHINES
+Route::get('/admin/machines/show',             'MachineController@machines_show')->name('admin-machines-show');
+
+Route::get('/admin/machines/create',           'MachineController@machines_create')->name('admin-machines-create');
+Route::post('/admin/machines/create',          'MachineController@machines_new');
+
+Route::get('/admin/machines/update/{machine}',    'MachineController@machines_update')->name('admin-machines-update');
+Route::post('/admin/machines/update/{machine}',   'MachineController@machines_save');
+// MACHINES
+
+// TOOLS
+Route::get('/admin/tools/show',             'ToolController@tools_show')->name('admin-tools-show');
+
+Route::get('/admin/tools/create',           'ToolController@tools_create')->name('admin-tools-create');
+Route::post('/admin/tools/create',          'ToolController@tools_new');
+
+Route::get('/admin/tools/update/{tool}',    'ToolController@tools_update')->name('admin-tools-update');
+Route::post('/admin/tools/update/{tool}',   'ToolController@tools_save');
+// TOOLS
+
 // COMAPNIES
 Route::get('/admin/companies/show',                 'CompanyController@companies_show')->name('admin-companies-show');
 
