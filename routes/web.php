@@ -59,13 +59,13 @@ Route::post('/admin/areas/update/{area}',   'AreaController@areas_save');
 // AREAS
 
 // MACHINES
-Route::get('/admin/machines/show',             'MachineController@machines_show')->name('admin-machines-show');
+Route::get('/admin/machines/show',              'MachineController@machines_show')->name('admin-machines-show');
 
-Route::get('/admin/machines/create',           'MachineController@machines_create')->name('admin-machines-create');
-Route::post('/admin/machines/create',          'MachineController@machines_new');
+Route::get('/admin/machines/create',            'MachineController@machines_create')->name('admin-machines-create');
+Route::post('/admin/machines/create',           'MachineController@machines_new');
 
-Route::get('/admin/machines/update/{machine}',    'MachineController@machines_update')->name('admin-machines-update');
-Route::post('/admin/machines/update/{machine}',   'MachineController@machines_save');
+Route::get('/admin/machines/update/{machine}',  'MachineController@machines_update')->name('admin-machines-update');
+Route::post('/admin/machines/update/{machine}', 'MachineController@machines_save');
 // MACHINES
 
 // TOOLS
@@ -78,7 +78,7 @@ Route::get('/admin/tools/update/{tool}',    'ToolController@tools_update')->name
 Route::post('/admin/tools/update/{tool}',   'ToolController@tools_save');
 // TOOLS
 
-// COMAPNIES
+// COMPANIES
 Route::get('/admin/companies/show',                 'CompanyController@companies_show')->name('admin-companies-show');
 
 Route::get('/admin/companies/create',               'CompanyController@companies_create')->name('admin-companies-create');
@@ -88,24 +88,28 @@ Route::get('/admin/companies/update/{company}',     'CompanyController@companies
 Route::post('/admin/companies/update/{company}',    'CompanyController@companies_save'); 
 
 Route::get('/admin/companies/active/{company}',     'CompanyController@companies_active')->name('admin-companies-active'); 
-// COMAPNIES
+// COMPANIES
 // ADMIN ---------------------------------------------------------------------------------------------------------------
 
 // ARTISAN -------------------------------------------------------------------------------------------------------------
 Route::get('/artisan/dashboard',            'ArtisanController@dashboard')->name('artisan-dashboard');
 
 // REUQEST
-Route::get('/artisan/requests/create',      'RequestController@create')->name('artisan-requests-create');
 Route::get('/artisan/requests/show',        'RequestController@show')->name('artisan-requests-show');
 
-Route::post('/artisan/requests/create',      'RequestController@store')->name('artisan-requests-show');
+Route::get('/artisan/requests/create',      'RequestController@create')->name('artisan-requests-create');
+Route::post('/artisan/requests/create',     'RequestController@store');
+// REUQEST
 
 // JOBS
 Route::get('/artisan/jobs/show',            'JobController@show')->name('artisan-jobs-show');
 Route::get('/artisan/jobs/update/{job}',    'JobController@update')->name('artisan-jobs-update');
+Route::post('/artisan/jobs/update/{job}',   'JobController@save');
+// JOBS
 
 // HISTORY
 Route::get('/artisan/history/show',         'HistoryController@show')->name('artisan-history-show');
+// HISTORY
 // ARTISAN -------------------------------------------------------------------------------------------------------------
 
 // ERROR 404 -----------------------------------------------------------------------------------------------------------

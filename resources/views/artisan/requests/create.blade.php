@@ -22,12 +22,12 @@
     </div>
 
     <div class="form-group row">
-        <label class="col-xs-12 col-sm-4" for="PlannedHours">PlannedHours</label>
+        <label class="col-xs-12 col-sm-4" for="PlannedHours">Planned Hours</label>
         <input class="col-xs-12 col-sm-8" id="PlannedHours" name="PlannedHours" type="number" min="0" value="{{ old('PlannedHours') }}" placeholder="Planned Hours" />
     </div>
 
     <div class="form-group row">
-        <label class="col-xs-12 col-sm-4" for="EstimatedCost">EstimatedCost</label>
+        <label class="col-xs-12 col-sm-4" for="EstimatedCost">Estimated Cost</label>
         <input class="col-xs-12 col-sm-8" id="EstimatedCost" name="EstimatedCost" type="number" min="0" value="{{ old('EstimatedCost') }}" placeholder="Estimated Cost" />
     </div>
 

@@ -482,18 +482,19 @@ csmall2 {
 	.input-form input[type="text"],
 	.input-form input[type="password"],
 	.input-form input[type="email"],
+	.input-form input[type="date"],
 	.input-form input[type="number"],
 	.input-form select
 	{
 		outline: none;
 		border: 0;
 		height: 35px;
-		border-radius: 5px;
 		border: solid 1px #384452;
 	}
 	.input-form input[type="text"]:focus,
 	.input-form input[type="password"]:focus,
 	.input-form input[type="email"]:focus,
+	.input-form input[type="date"]:focus,
 	.input-form input[type="number"]:focus,
 	{
 		border-color: #00b3fe;
@@ -507,7 +508,6 @@ csmall2 {
 		font-weight: bold;
 		background: #00b3fe;
 		height: 35px;
-		border-radius: 5px;
 	}
 
 .navbar-default .navbar-brand { cursor: default; }

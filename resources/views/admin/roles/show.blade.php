@@ -2,6 +2,7 @@
 
 @section('content')
 @include('layouts.errors')
+
 <div class="container" style="margin-top: 100px;">
     <div id="table-create" class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
@@ -11,6 +12,7 @@
             </a>
         </div> 
     </div>
+    
 @if(count($roles) == 0)
     <div id="nothing" class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
