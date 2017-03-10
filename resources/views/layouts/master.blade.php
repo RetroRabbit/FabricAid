@@ -14,6 +14,21 @@
     </head>
 
     <body>
+        @if(Request::is('/'))
+        <div class="navbar navbar-default navbar-fixed-top home" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <p class="navbar-brand" href="#">FabricAid</p>
+                </div>
+
+                <div class="navbar-right">            
+                    <ul class="nav navbar-nav">
+                        @yield('nav-content')       
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @else
         <div class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -34,9 +49,16 @@
                 </div>
             </div>
         </div>
-        
-        <div class="container-fluid" style="margin-top: 100px">
-        @yield('content')
+        @endif
+
+        <div class="subheader">
+            <div class="container">
+                <h1>{{ $header }}</h1>
+            </div>
+        </div>
+
+        <div id="body-content" class="container-fluid">            
+            @yield('content')
         </div>
 
         @include('includes.scripts')

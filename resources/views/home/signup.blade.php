@@ -7,28 +7,28 @@
     {{ csrf_field() }}
 
     <div class="form-group row">
-        <label class="col-xs-12 col-sm-4" for="FirstName">First Name</label>
-        <input class="col-xs-12 col-sm-8" id="FirstName" name="FirstName" type="text" value="{{ old('FirstName') }}" placeholder="First Name" />
+        <label class="col-xs-12" for="FirstName">First Name</label>
+        <input class="col-xs-12" id="FirstName" name="FirstName" type="text" value="{{ old('FirstName') }}" placeholder="First Name" />
     </div>
     
     <div class="form-group row">
-        <label class="col-xs-12 col-sm-4" for="LastName">Last Name</label>
-        <input class="col-xs-12 col-sm-8" id="LastName" name="LastName" type="text" value="{{ old('LastName') }}" placeholder="Last Name" />
+        <label class="col-xs-12" for="LastName">Last Name</label>
+        <input class="col-xs-12" id="LastName" name="LastName" type="text" value="{{ old('LastName') }}" placeholder="Last Name" />
     </div>
     
     <div class="form-group row">
-        <label class="col-xs-12 col-sm-4" for="Email">Email</label>
-        <input class="col-xs-12 col-sm-8" id="Email" name="Email" type="email" value="{{ old('Email') }}" placeholder="Email" />
+        <label class="col-xs-12" for="Email">Email</label>
+        <input class="col-xs-12" id="Email" name="Email" type="email" value="{{ old('Email') }}" placeholder="Email" />
     </div>
     
     <div class="form-group row">
-        <label class="col-xs-12 col-sm-4" for="Password">Password</label>
-        <input class="col-xs-12 col-sm-8" id="Password" name="Password" type="password" placeholder="Password" />
+        <label class="col-xs-12" for="Password">Password</label>
+        <input class="col-xs-12" id="Password" name="Password" type="password" placeholder="Password" />
     </div>
     
     <div class="form-group row">
-        <label class="col-xs-12 col-sm-4" for="Password">Confirm Password</label>
-        <input class="col-xs-12 col-sm-8" id="Password" name="Password_confirmation" type="password" placeholder="Password" />
+        <label class="col-xs-12" for="Password">Confirm Password</label>
+        <input class="col-xs-12" id="Password" name="Password_confirmation" type="password" placeholder="Password" />
     </div>
     
     <div class="form-group row">

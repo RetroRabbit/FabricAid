@@ -1,9 +1,7 @@
 @extends('admin.layout')
 
 @section('content')
-@include('layouts.errors')
-
-<div class="container" style="margin-top: 100px;">
+<!--div class="container">
     <div id="table-create" class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
             <a class="col-xs-2 col-lg-offset-1 btn btn-success" href="{{ route('admin-machines-create') }}">
@@ -11,7 +9,7 @@
                 <span class="col-xs-0 col-sm-0 col-md-9">Create</span>
             </a>
         </div> 
-    </div>
+    </div-->
 
 @if(count($machines) == 0)
     <div id="nothing" class="row">
@@ -23,20 +21,20 @@
 @else
     <div id="table-header" class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
-            <p class="hidden-xs col-sm-1"><strong>#</strong></p>
+            <p class="col-xs-1"><strong>Nr.</strong></p>
             <p class="col-xs-4"><strong>Machine Code</strong></p>
             <p class="col-xs-6"><strong>Machine Name</strong></p>
-            <p class="col-xs-1"><strong>Edit</strong></p>
+            <p class="col-xs-1" style="text-align: center;"><strong>Edit</strong></p>
         </div>
     </div>
 
     <div id="table-body" class="row">
         @for($i = 0; $i < count($machines); ++$i)
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10 col-lg-offset-1">
-            <p class="hidden-xs col-sm-1">{{ $i + 1 }}</p>
+            <p class="col-xs-1">{{ $i + 1 }}</p>
             <p class="col-xs-4">{{ $machines[$i]->Code }}</p>
             <p class="col-xs-6">{{ $machines[$i]->Name }}</p>
-            <a class="col-xs-1" style="text-align: center" href="{{ route('admin-machines-update', $machines[$i]->Id) }}"><i class="fa fa-pencil" aria-hidden="true" style="line-height: 40px;"></i></a>
+            <a class="col-xs-1" style="text-align: center; color: #384452;" href="{{ route('admin-machines-update', $machines[$i]->Id) }}"><i class="fa fa-pencil" aria-hidden="true" style="line-height: 40px;"></i></a>
         </div>
         @endfor
     </div>

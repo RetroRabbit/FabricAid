@@ -55,11 +55,11 @@ a {
 	padding: 0;
 	margin: 0;
 	text-decoration: none; 
-	-webkit-transition: background-color .4s linear, color .4s linear;
-	-moz-transition: background-color .4s linear, color .4s linear;
-	-o-transition: background-color .4s linear, color .4s linear;
-	-ms-transition: background-color .4s linear, color .4s linear;
-	transition: background-color .4s linear, color .4s linear;
+	-webkit-transition: background-color 0.2s, color 0.2s;
+	-moz-transition: background-color 0.2s, color 0.2s;
+	-o-transition: background-color 0.2s, color 0.2s;
+	-ms-transition: background-color 0.2s, color 0.2s;
+	transition: background-color 0.2s, color 0.2s;
 }
 a:hover,
 a:focus {
@@ -87,23 +87,109 @@ a:focus {
 ################################################################# */
 .navbar {
 	min-height: 70px;
-	padding-top: 10px;
+	padding-top: 15px;
 	margin-bottom: 0px;
+}
+.navbar.navbar-default.navbar-fixed-top
+{	
+	transition: 0.2s;
+}
+.navbar.navbar-default.navbar-fixed-top:after {
+	position: absolute;
+	margin-top: -10px;
+	height: 10px;
+	width: 100%;
+	background: rgba(0,0,0,0.75);
+}
+
+.navbar.home {
+	height: 100vh;
+}
+
+.navbar.home .navbar-right .nav.navbar-nav
+{
+	position: absolute;
+	top: 350px;
+	right: 10%;
+}
+.navbar.home #home { display: none; }
+.navbar.home #signin,
+.navbar.home #signup
+{
+	display: inline-block;
+
+	width: 125px;
+	margin: 0 10px;
+
+	text-align: center;
+	
+	background: none;
+	border: solid 1px white;
+	border-radius: 50px;
+
+	transition: background-color 0.2s linear, border-color 0.2s linear;
+	-moz-transition: background-color 0.2s linear, border-color 0.2s linear;
+	-webkit-transition: background-color 0.2s linear, border-color 0.2s linear;
+}
+.navbar.home #signin:hover,
+.navbar.home #signup:hover
+{
+	border: solid 1px #00b3fe;
+	background: #00b3fe;
+}
+
+.home li#signin:hover > a, .home li#signup:hover > a { color: white; }
+
+.navbar.navbar-default.navbar-fixed-top.home:after {
+	position: absolute;
+	margin-top: 80px;
+	height: 20px;
+	width: 100%;
+	border-top: solid 5px #00b3fe;
+	background: rgba(255,255,255,0.15);
 }
 
 .navbar-brand {
-	font-family: 'Raleway', sans-serif;
-	font-weight: 900;
+	font-size: 24px;
+	font-family: 'Futura', sans-serif;
+	font-weight: 500;
+}
+.home .navbar-brand {
+	margin-top: 100px;
+	font-size: 60px;
+	font-family: 'Futura', sans-serif;
+	font-weight: 100;
+}
+
+@media (max-width: 768px){.home .navbar-header:after { left: 5%; }}
+.home .navbar-header:after {
+	content: "Insert tagline or slogan here.";
+
+	position: relative;
+	height: 10px;
+	font-style: italic;
+	font-size: 18px;
+	font-family: 'Futura', sans-serif;
+	font-weight: 100;
+	color: white;
 }
 
 .navbar-header .navbar-brand {
 	color: white;
 }
 
+.navbar .navbar-collapse {
+	margin-top: 10px;
+}
+
+.navbar .navbar-toggle {
+	margin-top: 15px;
+}
+
 .navbar-default .navbar-nav > li > a {
 	color: white;
-	font-weight: 700;
-	font-size: 12px;
+	font-weight: 500;
+	font-size: 14px;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
@@ -463,22 +549,35 @@ csmall2 {
 /*	################################################################
 	GENERAL STYLING
 ################################################################# */
+	.subheader
+	{
+		display: block;
+		position: relative;
+		margin-top: 88px;
+		height: auto;
+		background: whitesmoke;
 
-.subheader
-{
-	padding-top: 50px;
-	margin-top: -50px;
-	padding-bottom: 10px;
-	background: #00b3fe;
-	color: white;
-}
+		transition: 0.2s;
+		-webkit-box-shadow: inset  0  5px 2px -5px #696868, 
+                        	inset  0 -5px 2px -5px #696868;
+		-moz-box-shadow: 	inset  0  5px 2px -5px #696868, 
+							inset  0 -5px 2px -5px #696868;
+		box-shadow: 		inset  0  5px 2px -5px #696868, 
+							inset  0 -5px 2px -5px #696868;
+	}
+		.subheader h1
+		{
+			font-size: 26px;
+			text-align: left;
+		}
+	@media (min-width: 768px) and (max-width: 992px) { .subheader { margin-top: 150px; } }
 
-.input-form
-{
-	margin-top: 50px;
-}
-	.input-form label { color: #384452; font-size: 16px; }
+	.input-form
+	{
+		font-family: "Futura", sans-serif;
+	}
 
+	.input-form label { height: 40px; line-height: 50px; }
 	.input-form input[type="text"],
 	.input-form input[type="password"],
 	.input-form input[type="email"],
@@ -486,18 +585,32 @@ csmall2 {
 	.input-form input[type="number"],
 	.input-form select
 	{
+		height: 35px;
 		outline: none;
 		border: 0;
-		height: 35px;
-		border: solid 1px #384452;
+		border-bottom: solid 2px #384452;
 	}
-	.input-form input[type="text"]:focus,
-	.input-form input[type="password"]:focus,
-	.input-form input[type="email"]:focus,
-	.input-form input[type="date"]:focus,
-	.input-form input[type="number"]:focus,
+	.input-form input[type="text"]:after,
+	.input-form input[type="password"]:after,
+	.input-form input[type="email"]:after,
+	.input-form input[type="date"]:after,
+	.input-form input[type="number"]:after
 	{
-		border-color: #00b3fe;
+		display: block;
+		position: absolute;
+		height: 2px;
+		background: #00b3fe;
+		width: 100%;
+		transition: 0.2;
+	}	
+
+	.input-form input[type="text"]:focus:after,
+	.input-form input[type="password"]:focus:after,
+	.input-form input[type="email"]:focus:after,
+	.input-form input[type="date"]:focus:after,
+	.input-form input[type="number"]:focus:after
+	{
+		width: 100%;
 	}
 
 	.input-form input[type="button"],
@@ -505,10 +618,48 @@ csmall2 {
 	{
 		border: 0;
 		color: white;
-		font-weight: bold;
+		font-weight: 500;
 		background: #00b3fe;
-		height: 35px;
+		height: 40px;
+		border-radius: 20px;
+		line-height: 42.5px;
+	}
+
+	.info-block
+	{
+		height: 150px;
+		background: #2B2E31;
+		height: auto;
+		cursor: pointer;
+	}
+
+	.info-block > h1
+	{
+		height: 80px;
+		line-height: 62px;
+		color: white;
+		font-size: 62px;
+		font-weight: normal;
+		text-align: center;
+	}
+
+	.info-block > h3
+	{
+		height: 30px;
+		line-height: 50px;
+		color: #00b3fe;
+		font-size: 22px;
+		font-weight: normal;
+		text-align: left;
+		padding-left: 15px;
 	}
 
 .navbar-default .navbar-brand { cursor: default; }
 .navbar-default .navbar-brand:hover { color: white; }
+
+#body-content
+{
+	background: white;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}

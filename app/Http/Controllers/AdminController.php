@@ -17,12 +17,13 @@ class AdminController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('is.admin');
     }
 
     public function dashboard()
     {
         return view('admin.dashboard')->with('title', 'Admin | Dashboard')
-                                      ->with('name', auth()->user()->FirstName.' '.auth()->user()->LastName)
+                                      ->with('header', 'Welcome back '.auth()->user()->FirstName.' '.auth()->user()->LastName)
                                       ->with('users', count(User::all()))
                                       ->with('companies', count(Company::all()))
                                       ->with('roles', count(Role::all()))

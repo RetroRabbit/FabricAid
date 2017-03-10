@@ -24,7 +24,8 @@ class HomeController extends Controller
         if (auth()->check())
             return $this->gotoDashboard();
         else
-            return view("home.index")->with('title', 'Home');
+            return view("home.index")->with('title', 'Home')
+                                     ->with('header', 'HOME');
     }
 
     public function signin()
@@ -32,7 +33,8 @@ class HomeController extends Controller
         if (auth()->check())
             return $this->gotoDashboard();
         else
-            return view("home.signin")->with('title', 'Sign In');
+            return view("home.signin")->with('title', 'Sign In')
+                                     ->with('header', 'SIGN IN');
     }
 
     public function signup()
@@ -40,12 +42,14 @@ class HomeController extends Controller
         if (auth()->check())
             return $this->gotoDashboard();
         else
-            return view("home.signup")->with('title', 'Sign Up');
+            return view("home.signup")->with('title', 'Sign Up')
+                                     ->with('header', 'SIGN UP');
     }
 
     public function error404()
     {
-        return view("home.error404")->with('title', 'Error 404');
+        return view("home.error404")->with('title', 'Error 404')
+                                 ->with('header', 'ERROR 404');
     }
     // VIEWS
 
