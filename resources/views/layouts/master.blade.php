@@ -14,7 +14,22 @@
     </head>
 
     <body>
-        <div class="navbar navbar-default navbar-fixed-top {{{ (Request::is('/') ? 'home' : null) }}}" role="navigation">
+        @if(Request::is('/'))
+        <div class="navbar navbar-default navbar-fixed-top home" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <p class="navbar-brand" href="#">FabricAid</p>
+                </div>
+
+                <div class="navbar-right">            
+                    <ul class="nav navbar-nav">
+                        @yield('nav-content')       
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @else
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -34,14 +49,15 @@
                 </div>
             </div>
         </div>
-        
+        @endif
+
         <div class="subheader">
             <div class="container">
                 <h1>{{ $header }}</h1>
             </div>
         </div>
 
-        <div class="container-fluid" style="background: white; padding-top: 50px;">            
+        <div id="body-content" class="container-fluid">            
             @yield('content')
         </div>
 

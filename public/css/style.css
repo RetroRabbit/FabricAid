@@ -105,9 +105,44 @@ a:focus {
 .navbar.home {
 	height: 100vh;
 }
+
+.navbar.home .navbar-right .nav.navbar-nav
+{
+	position: absolute;
+	top: 350px;
+	right: 10%;
+}
+.navbar.home #home { display: none; }
+.navbar.home #signin,
+.navbar.home #signup
+{
+	display: inline-block;
+
+	width: 125px;
+	margin: 0 10px;
+
+	text-align: center;
+	
+	background: none;
+	border: solid 1px white;
+	border-radius: 50px;
+
+	transition: background-color 0.2s linear, border-color 0.2s linear;
+	-moz-transition: background-color 0.2s linear, border-color 0.2s linear;
+	-webkit-transition: background-color 0.2s linear, border-color 0.2s linear;
+}
+.navbar.home #signin:hover,
+.navbar.home #signup:hover
+{
+	border: solid 1px #00b3fe;
+	background: #00b3fe;
+}
+
+.home li#signin:hover > a, .home li#signup:hover > a { color: white; }
+
 .navbar.navbar-default.navbar-fixed-top.home:after {
 	position: absolute;
-	margin-top: 50px;
+	margin-top: 80px;
 	height: 20px;
 	width: 100%;
 	border-top: solid 5px #00b3fe;
@@ -126,17 +161,17 @@ a:focus {
 	font-weight: 100;
 }
 
-.home .navbar-brand:after {
+@media (max-width: 768px){.home .navbar-header:after { left: 5%; }}
+.home .navbar-header:after {
 	content: "Insert tagline or slogan here.";
 
 	position: relative;
-	left: -250px;
-	top: 30px;
-	margin: 0px;
+	height: 10px;
 	font-style: italic;
 	font-size: 18px;
 	font-family: 'Futura', sans-serif;
 	font-weight: 100;
+	color: white;
 }
 
 .navbar-header .navbar-brand {
@@ -518,18 +553,24 @@ csmall2 {
 	{
 		display: block;
 		position: relative;
-		padding-top: 90px;
+		margin-top: 88px;
 		height: auto;
 		background: whitesmoke;
 
 		transition: 0.2s;
+		-webkit-box-shadow: inset  0  5px 2px -5px #696868, 
+                        	inset  0 -5px 2px -5px #696868;
+		-moz-box-shadow: 	inset  0  5px 2px -5px #696868, 
+							inset  0 -5px 2px -5px #696868;
+		box-shadow: 		inset  0  5px 2px -5px #696868, 
+							inset  0 -5px 2px -5px #696868;
 	}
 		.subheader h1
 		{
 			font-size: 26px;
 			text-align: left;
 		}
-	@media (min-width: 768px) and (max-width: 992px) { .subheader { padding-top: 150px; } }
+	@media (min-width: 768px) and (max-width: 992px) { .subheader { margin-top: 150px; } }
 
 	.input-form
 	{
@@ -579,8 +620,9 @@ csmall2 {
 		color: white;
 		font-weight: 500;
 		background: #00b3fe;
-		height: 35px;
-		border-radius: 15px;
+		height: 40px;
+		border-radius: 20px;
+		line-height: 42.5px;
 	}
 
 	.info-block
@@ -614,3 +656,10 @@ csmall2 {
 
 .navbar-default .navbar-brand { cursor: default; }
 .navbar-default .navbar-brand:hover { color: white; }
+
+#body-content
+{
+	background: white;
+	padding-top: 50px;
+	padding-bottom: 50px;
+}

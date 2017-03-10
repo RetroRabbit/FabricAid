@@ -55,7 +55,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function isSupervisor()
     {
-        return $this->RoleId == Role::supevisor()->Id;
+        return $this->RoleId == Role::supervisor()->Id;
     }
 
     public function isArtisan()
