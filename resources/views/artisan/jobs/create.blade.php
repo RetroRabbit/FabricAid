@@ -10,31 +10,50 @@
         <label class="col-xs-12 col-sm-4" for="Priority">Priority</label>
         <input class="col-xs-12 col-sm-8" id="Priority" name="Priority" type="number" min="0" value="{{ old('Priority') }}" placeholder="Priority" />
     </div>
-
+    
     <div class="form-group row">
-        <label class="col-xs-12 col-sm-4" for="PlannedStartDate">Planned Start Date</label>
-        <input class="col-xs-12 col-sm-8" id="PlannedStartDate" name="PlannedStartDate" type="date"  value="{{ old('PlannedStartDate') }}" />
-    </div>
+        <label class="col-xs-12 col-sm-4" for="Company"><strong>Company</strong></label>
+        <select class="col-xs-12 col-sm-8" id="Company" name="Company" value="{{ old('Company') }}">
+            <option value="">--- Please pick a company ---</option>
 
-    <div class="form-group row">
-        <label class="col-xs-12 col-sm-4" for="PlannedCompletionDate">Planned Completion Date</label>
-        <input class="col-xs-12 col-sm-8" id="PlannedCompletionDate" name="PlannedCompletionDate" type="date"  value="{{ old('PlannedCompletionDate') }}" />
+            @foreach($companies as $company)
+            <option value="{{ $company->Id }}">{{ $company->Name }}</option>
+            @endforeach
+        </select>
     </div>
+    
+    <div class="form-group row">
+        <label class="col-xs-12 col-sm-4" for="Area"><strong>Area</strong></label>
+        <select class="col-xs-12 col-sm-8" id="Area" name="Area" value="{{ old('Area') }}">
+            <option value="">--- Please pick a area ---</option>
 
+            @foreach($areas as $area)
+            <option value="{{ $area->Id }}">{{ $area->Name }}</option>
+            @endforeach
+        </select>
+    </div>    
+    
     <div class="form-group row">
-        <label class="col-xs-12 col-sm-4" for="PlannedHours">Planned Hours</label>
-        <input class="col-xs-12 col-sm-8" id="PlannedHours" name="PlannedHours" type="number" min="0" value="{{ old('PlannedHours') }}" placeholder="Planned Hours" />
-    </div>
+        <label class="col-xs-12 col-sm-4" for="Machine"><strong>Machine</strong></label>
+        <select class="col-xs-12 col-sm-8" id="Machine" name="Machine" value="{{ old('Machine') }}">
+            <option value="">--- Please pick a machine ---</option>
 
+            @foreach($machines as $machine)
+            <option value="{{ $machine->Id }}">{{ $machine->Name }}</option>
+            @endforeach
+        </select>
+    </div>    
+    
     <div class="form-group row">
-        <label class="col-xs-12 col-sm-4" for="EstimatedCost">Estimated Cost</label>
-        <input class="col-xs-12 col-sm-8" id="EstimatedCost" name="EstimatedCost" type="number" min="0" value="{{ old('EstimatedCost') }}" placeholder="Estimated Cost" />
-    </div>
+        <label class="col-xs-12 col-sm-4" for="Tool"><strong>Tool</strong></label>
+        <select class="col-xs-12 col-sm-8" id="Tool" name="Tool" value="{{ old('Tool') }}">
+            <option value="">--- Please pick a tool ---</option>
 
-    <div class="form-group row">
-        <label class="col-xs-12 col-sm-4" for="Prority">Prority</label>
-        <input class="col-xs-12 col-sm-8" id="Prority" name="Prority" type="number" min="0" value="{{ old('Prority') }}" placeholder="Priority" />
-    </div>
+            @foreach($tools as $tool)
+            <option value="{{ $tool->Id }}">{{ $tool->Name }}</option>
+            @endforeach
+        </select>
+    </div>   
     
     <div class="form-group row">
         <input class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4" id="Submit" name="Submit" type="submit" value="Submit" />
