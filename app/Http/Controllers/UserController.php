@@ -13,6 +13,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('is.admin');
     }
 
     public function redirectTo()
@@ -21,14 +22,14 @@ class UserController extends Controller
     }
 
     // VIEWS
-    public function users_show()
+    public function show()
     {
         return view('admin.users.show')->with('title', 'Admin | View Users')
                                        ->with('header', 'User List')
                                        ->with('users', User::select(['Id', 'FirstName', 'LastName', 'Email', 'Active'])->get());
     }
     
-    public function users_create()
+    public function create()
     {
         return view('admin.users.create')->with('title', 'Admin | New User')
                                          ->with('header', 'Create New User')
@@ -36,7 +37,7 @@ class UserController extends Controller
                                          ->with('artisanTypes', ArtisanType::all());
     }
     
-    public function users_update(User $user)
+    public function update(User $user)
     {
         return view('admin.users.update')->with('title', 'Admin | Update User')
                                          ->with('header', 'Update User Details')
@@ -47,7 +48,7 @@ class UserController extends Controller
     // VIEWS
 
     // ACTIONS
-    public function users_new()
+    public function new()
     {
         $fields = request()->except('_token', 'Role', 'ArtisanType', 'Submit');
         $validator = validator()->make(request()->except('Submit'),
@@ -78,7 +79,7 @@ class UserController extends Controller
         }
     }
 
-    public function users_save(User $user)
+    public function save(User $user)
     {
         $fields = request()->except('_token', 'Role', 'ArtisanType', 'Submit');
         $validator = validator()->make(request()->except('Submit'),
@@ -106,7 +107,7 @@ class UserController extends Controller
         }
     }
 
-    public function users_active(User $user)
+    public function active(User $user)
     {
         $user->Active = !$user->Active;
         $user->save();

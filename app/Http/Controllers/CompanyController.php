@@ -10,6 +10,7 @@ class CompanyController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('is.admin');
     }
 
     public function redirectTo()
@@ -18,20 +19,20 @@ class CompanyController extends Controller
     }
 
     // VIEWS
-    public function companies_show()
+    public function show()
     {
         return view('admin.companies.show')->with('title', 'Admin | View Companies')
                                            ->with('header', 'Company List')
                                            ->with('companies', Company::select(['Id', 'Code', 'Name', 'Active'])->get());
     }
 
-    public function companies_create()
+    public function create()
     {
         return view('admin.companies.create')->with('title', 'Admin | New Company')
                                              ->with('header', 'Create New Company');
     }
 
-    public function companies_update(Company $company)
+    public function update(Company $company)
     {
         return view('admin.companies.update')->with('title', 'Admin | Update Company')
                                              ->with('header', 'Update Company Details')
@@ -40,7 +41,7 @@ class CompanyController extends Controller
     // VIEWS
     
     // ACTIONS
-    public function companies_new()
+    public function new()
     {
         $fields = request()->except('_token', 'Submit');
         $validator = validator()->make(request()->except('Submit'),
@@ -61,7 +62,7 @@ class CompanyController extends Controller
         }
     }
 
-    public function companies_save(Company $company)
+    public function save(Company $company)
     {
         $fields = request()->except('_token', 'Submit');
         $validator = validator()->make(request()->except('Submit'),
@@ -83,7 +84,7 @@ class CompanyController extends Controller
         }
     }
 
-    public function companies_active(Company $company)
+    public function active(Company $company)
     {
         $company->Active = !$company->Active;
         $company->save();

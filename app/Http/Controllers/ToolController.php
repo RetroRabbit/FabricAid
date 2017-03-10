@@ -9,22 +9,28 @@ use App\Machine;
 
 class ToolController extends Controller
 {    
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('is.admin');
+    }
+
     // VIEWS
-    public function tools_show()
+    public function show()
     {
         return view('admin.tools.show')->with('title', 'Admin | Tool')
                                        ->with('header', 'Tool List')
                                        ->with('tools', Tool::all());
     }
     
-    public function tools_create()
+    public function create()
     {
         return view('admin.tools.create')->with('title', 'Admin | Create Tool')
                                          ->with('header', 'Create New Tool')
                                          ->with('tools', Machine::all());
     }
     
-    public function tools_update($tool)
+    public function update($tool)
     {
         return view('admin.tools.update')->with('title', 'Admin | Create Tool')
                                          ->with('header', 'Update Tool Details')
@@ -34,12 +40,12 @@ class ToolController extends Controller
     // VIEWS
 
     // ACTIONS
-    public function tools_new()
+    public function new()
     {
 
     }
     
-    public function tools_save()
+    public function save()
     {
 
     }

@@ -11,4 +11,19 @@ class Role extends Model
     protected $table = 'Role';
     protected $primaryKey = 'Id';
     protected $fillable = ['Name'];
+
+    public function scopeAdministrator($query)
+    {
+        return $query->where('Name', 'Administrator')->first();
+    }
+
+    public function scopeSupervisor($query)
+    {
+        return $query->where('Name', 'Supervisor')->first();
+    }
+
+    public function scopeArtisan($query)
+    {
+        return $query->where('Name', 'Artisan')->first();
+    }
 }

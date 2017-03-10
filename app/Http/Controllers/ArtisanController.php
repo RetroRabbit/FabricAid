@@ -11,8 +11,9 @@ class ArtisanController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('is.artisan');
     }
-
+    
     public function redirectTo()
     {
         return redirect()->route('home-signin')->withErrors('message', 'You must be logged in to access the system.');
@@ -22,7 +23,7 @@ class ArtisanController extends Controller
     public function dashboard()
     {
         return view('artisan.dashboard')->with('title', 'Artisan | Dashboard')
-                                        ->with('name', auth()->user()->FirstName.' '.auth()->user()->LastName)
+                                        ->with('header', 'Welcome back '.auth()->user()->FirstName.' '.auth()->user()->LastName)
                                         ->with('jobs', count(Job::active()->get()))
                                         ->with('requests', count(Job::request()->get()))
                                         ->with('history', count(Job::history()->get()));

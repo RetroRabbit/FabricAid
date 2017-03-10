@@ -12,6 +12,7 @@ class RoleController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->middleware('is.admin');
     }
 
     public function redirectTo()
@@ -20,7 +21,7 @@ class RoleController extends Controller
     }
 
     // VIEWS
-    public function roles_show()
+    public function show()
     {
         $roles = Role::all();
         $infos = [];
@@ -40,14 +41,14 @@ class RoleController extends Controller
                                        ->with('roles', $infos);
     }
     
-    public function roles_create()
+    public function create()
     {
         return view('admin.roles.create')->with('title', 'Admin | New Role')
                                          ->with('header', 'Create New Role')
                                          ->with('accesses', Access::all());
     }
     
-    public function roles_update(Role $role)
+    public function update(Role $role)
     {
         return view('admin.roles.update')->with('title', 'Admin | Update Role')
                                          ->with('header', 'Update Role Details')
@@ -58,7 +59,7 @@ class RoleController extends Controller
     // VIEWS
 
     // ACTIONS
-    public function roles_new()
+    public function new()
     {
         $accesses = request()->except('_token', 'Name', 'Submit');
         $validator = validator()->make(request()->only('Name'), ['Name' => 'required|unique:Role']);
@@ -78,7 +79,7 @@ class RoleController extends Controller
         }
     }
 
-    public function roles_save(Role $role)
+    public function save(Role $role)
     {
         $validator = validator()->make(request()->only('Name'), ['Name' => 'required']);
         
@@ -95,7 +96,7 @@ class RoleController extends Controller
         }
     }
 
-    public function roles_delete(Role $role)
+    public function delete(Role $role)
     {
         $role->delete();
 
