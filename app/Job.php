@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Status;
+
 class Job extends Model
 {
     public $timestamps = false;
@@ -11,18 +13,13 @@ class Job extends Model
     protected $primaryKey = 'Id';
     protected $fillable = ['Priority', 'DateCreated', 'PlannedStartDate', 'PlannedCompletionDate', 'PlannedHours', 'EstimatedCost', 'ActualHours', 'ActualCost', 'JobDetails'];
 
-    public function scopeHistory($query)
-    {
-        return $query;
-    }
-
     public function scopeRequest($query)
     {
-        return $query;
+        return $query->where('StatusId', Status::inactive()->first()->Id);
     }
 
     public function scopeActive($query)
     {
-        return $query;
+        return $query->whereIn('StatusId', Status::active()->get()->pluck('Id')->toArray());
     }
 }

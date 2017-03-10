@@ -385,6 +385,7 @@ class DatabaseSeeder extends Seeder
 
     private function Status()
     {
+        Status::firstOrCreate(['Code' => 'ST-I',    'Name' => 'Inactive']);
         Status::firstOrCreate(['Code' => 'ST-P',    'Name' => 'Pending']);
         Status::firstOrCreate(['Code' => 'ST-R',    'Name' => 'Running']);
         Status::firstOrCreate(['Code' => 'ST-OH',   'Name' => 'On-Hold']);
