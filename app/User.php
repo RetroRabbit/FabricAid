@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Support\Facades\Hash;
 
 use App\Role;
 
@@ -26,7 +27,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function setPasswordAttribute($password)
     {
-        $this->attributes['Password'] = bcrypt($password);
+        $this->attributes['Password'] = Hash::make($password);
     }
 
     public function scopeActive($query)
