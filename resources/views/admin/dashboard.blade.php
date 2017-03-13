@@ -15,7 +15,7 @@
     </a>
 
     <a class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-1 col-md-4 form-group info-block" href="{{ route('admin-roles-show') }}">
-        <i class="fa fa-credit-card fa-5x"></i>
+        <i class="fa fa-tasks fa-5x"></i>
         <h3>Roles</h3>
         <h1>{{ $roles }}</h1>
     </a>

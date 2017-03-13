@@ -10,4 +10,9 @@ class Area extends Model
     protected $table = 'Area';
     protected $primaryKey = 'Id';
     protected $fillable = ['Code', 'Name', 'Location'];
+
+    public function scopeFromCompany($query, $Id)
+    {
+        return $query->where('ComapanyId', $Id);
+    }
 }
