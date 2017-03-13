@@ -13,11 +13,6 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-    public function username()
-    {
-        return 'Email';
-    }
-
     // VIEWS
     public function index()
     {
@@ -89,17 +84,21 @@ class HomeController extends Controller
             'Password' => 'required|max:191'
         ];
         $validator = validator()->make(request()->except('Submit'), $rules);
-
+        
         if ($validator->fails())
         {
             return redirect()->back()->withErrors($validator);
         }
         else
         {
-            if (auth()->attempt($fields))
+            $user = User::where('Email', $fields['Email'])->first();
+            if ($user && Hash::check($fields['Password'], $user->Password))
+            {
+                auth()->login($user);
                 return $this->gotoDashboard();
+            }
             else
-                return redirect()->back()->withInput(request()->only('Email'))->withErrors(['Find' => 'Could not a user with those credentials. Please confirm and try again.']);
+                return redirect()->back()->withInput(request()->only('Email'))->withErrors(['Find' => 'Could not find a user with those credentials. Please confirm and try again.']);
         }
     }
 
