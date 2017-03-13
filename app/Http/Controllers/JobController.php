@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\Job;
+use App\Company;
+use App\Area;
+use App\Machine;
+use App\Tool;
+use App\User;
+use App\Status;
+use Carbon\Carbon;
 
 class JobController extends Controller
 {
@@ -21,27 +28,37 @@ class JobController extends Controller
     }
 
     // VIEWS
-    public function jobs_active()
+    public function active()
     {
         return view('artisan.jobs.active')->with('title', 'Artisan | Jobs')
                                           ->with('header', 'Active Jobs List')
                                           ->with('jobs', Job::active()->get());
     }
 
-    public function jobs_requests()
+    public function requests()
     {
+        $requests = [];
+        $jobs = Job::request()->get();
+        foreach ($jobs as $request)
+        {
+            array_push($requests, $request->fillForeignKeys());
+        }
+
+        //dd($requests);
+
         return view('artisan.jobs.requests')->with('title', 'Artisan | Jobs')
                                             ->with('header', 'Job Request List')
-                                            ->with('requests', Job::request()->get());
+                                            ->with('requests', $requests);
     }
 
-    public function jobs_create()
+    public function create()
     {
         return view('artisan.jobs.create')->with('title', 'Artisan | Create Job')
-                                              ->with('header', 'New Job Request');
+                                          ->with('header', 'New Job Request')
+                                          ->with('companies', Company::all());
     }
     
-    public function jobs_update(Job $job)
+    public function update(Job $job)
     {
         return view('artisan.jobs.update')->with('title', 'Artisan | Job Update')
                                           ->with('header', 'Update Job Status')
@@ -50,15 +67,44 @@ class JobController extends Controller
     // VIEWS
 
     // ACTIONS
-    public function jobstore()
+    public function store()
     {
         $fields = request()->except('_token', 'Submit');
-        dd($fields);
-        $validator = validator()->make(request()->except('Submit'));
-        return redirect()->route('artisan-requests-show');
+        $rules = 
+        [
+            'Priority' => 'required',
+            'Company' => 'required',
+            'Area' => 'required',
+            'Machine' => 'required',
+            'Tool' => 'required'
+        ];
+        $validator = validator()->make(request()->except('Submit'), $rules);
+
+        if ($validator->fails())
+        {
+            return redirect()->back()->withInput()->withErrors($validator);    
+        }
+        else
+        {
+            $job = new Job();
+            
+            $job->Priority = $fields['Priority'];
+            $job->DateCreated = Carbon::now()->format('Y-m-d');
+            $job->CompanyId = $fields['Company'];
+            $job->AreaId = $fields['Area'];
+            $job->MachineId = $fields['Machine'];
+            $job->ToolId = $fields['Tool'];
+            $job->JobDetails = $fields['Details'];
+            $job->CreatedBy = auth()->user()->Id;
+            $job->StatusId = Status::inactive()->first()->Id;
+
+            $job->save();
+
+            return redirect()->route('artisan-jobs-requests');
+        }
     }
 
-    public function jobs_save(Job $job)
+    public function save(Job $job)
     {
         dd($job, request());
         return redirect()->route('artisan-jobs-show');

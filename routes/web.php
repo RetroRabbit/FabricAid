@@ -91,23 +91,31 @@ Route::get('/admin/companies/active/{company}',     'CompanyController@active')-
 // COMPANIES
 // ADMIN ---------------------------------------------------------------------------------------------------------------
 
+// SUPERVISOR -------------------------------------------------------------------------------------------------------------
+Route::get('/supervisor/dashboard',           function(){ return redirect()->route('home-signout'); } /*'SupervisorController@dashboard'*/)->name('supervisor-dashboard');
+// SUPERVISOR -------------------------------------------------------------------------------------------------------------
+
 // ARTISAN -------------------------------------------------------------------------------------------------------------
 Route::get('/artisan/dashboard',            'ArtisanController@dashboard')->name('artisan-dashboard');
 
-// ACTIVE JOBS
-Route::get('/artisan/jobs/active',          'JobController@jobs_active')->name('artisan-jobs-active');
+Route::post('/artisan/jobs/api',            'JobController@populate')->name('artisan-jobs-api');
 
-Route::get('/artisan/jobs/create',          'JobController@jobs_create')->name('artisan-jobs-create');
-Route::post('/artisan/jobs/create',         'JobController@jobs_store');
+// ACTIVE JOBS
+Route::get('/artisan/jobs/active',          'JobController@active')->name('artisan-jobs-active');
+
+Route::get('/artisan/jobs/create',          'JobController@create')->name('artisan-jobs-create');
+Route::post('/artisan/jobs/create',         'JobController@store');
 // ACTIVE JOBS
 
 // JOB REQUESTS
-Route::get('/artisan/jobs/requests',        'JobController@jobs_requests')->name('artisan-jobs-requests');
-Route::get('/artisan/jobs/update/{job}',    'JobController@jobs_update')->name('artisan-jobs-update');
-Route::post('/artisan/jobs/update/{job}',   'JobController@jobs_save');
+Route::get('/artisan/jobs/requests',        'JobController@requests')->name('artisan-jobs-requests');
+Route::get('/artisan/jobs/update/{job}',    'JobController@update')->name('artisan-jobs-update');
+Route::post('/artisan/jobs/update/{job}',   'JobController@save');
 // JOB REQUESTS
 // ARTISAN -------------------------------------------------------------------------------------------------------------
 
+Route::post('/api/find', 'APIController@find')->name('vms-api-find');
+
 // ERROR 404 -----------------------------------------------------------------------------------------------------------
-Route::get('/{any}',    'HomeController@error404')->where('any', '.*')->name('home-error404');
+Route::get('/{any}', 'HomeController@error404')->where('any', '.*')->name('home-error404');
 // ERROR 404 -----------------------------------------------------------------------------------------------------------

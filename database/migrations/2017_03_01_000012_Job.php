@@ -15,27 +15,27 @@ class Job extends Migration
     {
         Schema::create('Job', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->integer('priority')->unsigned();
+            $table->integer('Priority')->unsigned();
             $table->date('DateCreated');
-            $table->date('PlannedStartDate');
-            $table->date('PlannedCompletionDate');
-            $table->integer('PlannedHours')->unsigned();
-            $table->decimal('EstimatedCost', 6, 2);
-            $table->text('Comments');
-            $table->integer('ActualHours')->unsigned();
-            $table->decimal('ActualCost', 6, 2);
+            $table->date('PlannedStartDate')->nullable();
+            $table->date('PlannedCompletionDate')->nullable();
+            $table->integer('PlannedHours')->unsigned()->nullable();
+            $table->decimal('EstimatedCost', 6, 2)->nullable();
+            $table->text('Comments')->nullable();
+            $table->integer('ActualHours')->unsigned()->nullable();
+            $table->decimal('ActualCost', 6, 2)->nullable();
             $table->string('JobDetails', 255);
             $table->integer('ToolId')->unsigned();
             $table->integer('MachineId')->unsigned();
             $table->integer('AreaId')->unsigned();
-            $table->integer('CreatedBy')->unsigned();
-            $table->integer('AssignedBy')->unsigned();
-            $table->integer('AssignedTo')->unsigned();
-            $table->integer('TypeId')->unsigned();
-            $table->integer('TemplateId')->unsigned();
-            $table->integer('FocusAreaId')->unsigned();
-            $table->integer('StatusId')->unsigned();
             $table->integer('CompanyId')->unsigned();
+            $table->integer('CreatedBy')->unsigned();
+            $table->integer('AssignedBy')->unsigned()->nullable();
+            $table->integer('AssignedTo')->unsigned()->nullable();
+            $table->integer('TypeId')->unsigned()->nullable();
+            $table->integer('TemplateId')->unsigned()->nullable();
+            $table->integer('FocusAreaId')->unsigned()->nullable();
+            $table->integer('StatusId')->unsigned();
 
             $table->foreign('ToolId')->references('Id')->on('Tool')->onDelete('cascade');
             $table->foreign('MachineId')->references('Id')->on('Machine')->onDelete('no action');

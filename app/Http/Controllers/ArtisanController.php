@@ -25,8 +25,7 @@ class ArtisanController extends Controller
         return view('artisan.dashboard')->with('title', 'Artisan | Dashboard')
                                         ->with('header', 'Welcome back '.auth()->user()->FirstName.' '.auth()->user()->LastName)
                                         ->with('jobs', count(Job::active()->get()))
-                                        ->with('requests', count(Job::request()->get()))
-                                        ->with('history', count(Job::history()->get()));
+                                        ->with('requests', count(Job::request()->get()));
     }
     // VIEWS
 
