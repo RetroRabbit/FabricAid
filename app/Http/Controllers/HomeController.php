@@ -92,7 +92,7 @@ class HomeController extends Controller
         else
         {
             $user = User::where('Email', $fields['Email'])->first();
-            if (Hash::check($fields['Password'], $user->Password))
+            if ($user && Hash::check($fields['Password'], $user->Password))
             {
                 auth()->login($user);
                 return $this->gotoDashboard();
