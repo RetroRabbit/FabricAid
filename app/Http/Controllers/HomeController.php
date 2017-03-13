@@ -13,11 +13,6 @@ use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-    public function username()
-    {
-        return 'Email';
-    }
-
     // VIEWS
     public function index()
     {
@@ -99,7 +94,7 @@ class HomeController extends Controller
             if (auth()->attempt($fields))
                 return $this->gotoDashboard();
             else
-                return redirect()->back()->withInput(request()->only('Email'))->withErrors(['Find' => 'Could not a user with those credentials. Please confirm and try again.']);
+                return redirect()->back()->withInput(request()->only('Email'))->withErrors(['Find' => 'Could not find a user with those credentials. Please confirm and try again.']);
         }
     }
 

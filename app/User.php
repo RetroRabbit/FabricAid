@@ -21,12 +21,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
     public function getAuthPassword()
     {
-        return $this->Password;
+        return $this->attributes['Password'];
     }
 
     public function setPasswordAttribute($password)
     {
-        $this->attributes['password'] = bcrypt($password);
+        $this->attributes['Password'] = bcrypt($password);
     }
 
     public function scopeActive($query)

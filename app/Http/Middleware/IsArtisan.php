@@ -15,7 +15,6 @@ class IsArtisan
      */
     public function handle($request, Closure $next)
     {
-        dd(auth()->user());
         if(!$request->user()->isArtisan())
         {
             if ($request->user()->isAdmin())
