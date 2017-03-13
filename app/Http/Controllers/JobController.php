@@ -11,6 +11,8 @@ use App\Area;
 use App\Machine;
 use App\Tool;
 use App\User;
+use App\Status;
+use Carbon\Carbon;
 
 class JobController extends Controller
 {
@@ -35,9 +37,18 @@ class JobController extends Controller
 
     public function requests()
     {
+        $requests = [];
+        $jobs = Job::request()->get();
+        foreach ($jobs as $request)
+        {
+            array_push($requests, $request->fillForeignKeys());
+        }
+
+        //dd($requests);
+
         return view('artisan.jobs.requests')->with('title', 'Artisan | Jobs')
                                             ->with('header', 'Job Request List')
-                                            ->with('requests', Job::request()->get());
+                                            ->with('requests', $requests);
     }
 
     public function create()
@@ -73,8 +84,24 @@ class JobController extends Controller
         {
             return redirect()->back()->withInput()->withErrors($validator);    
         }
+        else
+        {
+            $job = new Job();
+            
+            $job->Priority = $fields['Priority'];
+            $job->DateCreated = Carbon::now()->format('Y-m-d');
+            $job->CompanyId = $fields['Company'];
+            $job->AreaId = $fields['Area'];
+            $job->MachineId = $fields['Machine'];
+            $job->ToolId = $fields['Tool'];
+            $job->JobDetails = $fields['Details'];
+            $job->CreatedBy = auth()->user()->Id;
+            $job->StatusId = Status::inactive()->first()->Id;
 
-        return redirect()->route('artisan-requests-show');
+            $job->save();
+
+            return redirect()->route('artisan-jobs-requests');
+        }
     }
 
     public function save(Job $job)

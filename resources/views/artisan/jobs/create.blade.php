@@ -42,6 +42,12 @@
             <option value="">--- Please pick a tool ---</option>
         </select>
     </div>
+    
+    <div class="form-group row">
+        <label class="col-xs-12 col-sm-4" for="Details"><strong>Details</strong></label>
+        <textarea class="col-xs-12 col-sm-8" id="Details" name="Details" value="{{ old('Details') }}">
+        </textarea>
+    </div>
 
     <div class="form-group row">
         <input class="col-xs-6 col-xs-offset-3 col-sm-4 col-sm-offset-4" id="Submit" name="Submit" type="submit" value="Submit" />

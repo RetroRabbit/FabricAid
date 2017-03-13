@@ -26,6 +26,18 @@ class UserSeeder extends Seeder
     
         User::firstOrCreate(
         [
+            'FirstName'     =>  'Michael',
+            'LastName'      =>  'Jackson',
+            'Email'         =>  'mjackson@gmail.com',
+            'Password'      =>  'supervisor',
+            'Confirmed'     =>  true,
+            'DateCreated'   =>  '2017-01-01',
+            'Active'        =>  true,
+            'RoleId'        =>  2
+        ]);
+    
+        User::firstOrCreate(
+        [
             'FirstName'     =>  'Jack',
             'LastName'      =>  'Dawson',
             'Email'         =>  'JDawson@gmail.com',

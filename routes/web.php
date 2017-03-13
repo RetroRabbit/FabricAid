@@ -91,6 +91,10 @@ Route::get('/admin/companies/active/{company}',     'CompanyController@active')-
 // COMPANIES
 // ADMIN ---------------------------------------------------------------------------------------------------------------
 
+// SUPERVISOR -------------------------------------------------------------------------------------------------------------
+Route::get('/supervisor/dashboard',           function(){ return redirect()->route('home-signout'); } /*'SupervisorController@dashboard'*/)->name('supervisor-dashboard');
+// SUPERVISOR -------------------------------------------------------------------------------------------------------------
+
 // ARTISAN -------------------------------------------------------------------------------------------------------------
 Route::get('/artisan/dashboard',            'ArtisanController@dashboard')->name('artisan-dashboard');
 
@@ -110,7 +114,7 @@ Route::post('/artisan/jobs/update/{job}',   'JobController@save');
 // JOB REQUESTS
 // ARTISAN -------------------------------------------------------------------------------------------------------------
 
-Route::post('/api', 'APIController@find')->name('vms-api-find');
+Route::post('/api/find', 'APIController@find')->name('vms-api-find');
 
 // ERROR 404 -----------------------------------------------------------------------------------------------------------
 Route::get('/{any}', 'HomeController@error404')->where('any', '.*')->name('home-error404');

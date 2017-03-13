@@ -15,7 +15,7 @@ class Job extends Migration
     {
         Schema::create('Job', function (Blueprint $table) {            
             $table->increments('Id');
-            $table->integer('priority')->unsigned();
+            $table->integer('Priority')->unsigned();
             $table->date('DateCreated');
             $table->date('PlannedStartDate')->nullable();
             $table->date('PlannedCompletionDate')->nullable();
@@ -34,7 +34,7 @@ class Job extends Migration
             $table->integer('AssignedTo')->unsigned()->nullable();
             $table->integer('TypeId')->unsigned()->nullable();
             $table->integer('TemplateId')->unsigned()->nullable();
-            $table->integer('FocusAreaId')->unsigned();
+            $table->integer('FocusAreaId')->unsigned()->nullable();
             $table->integer('StatusId')->unsigned();
 
             $table->foreign('ToolId')->references('Id')->on('Tool')->onDelete('cascade');

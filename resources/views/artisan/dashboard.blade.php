@@ -15,7 +15,7 @@
             <h1>{{ $requests }}</h1>
         </a>
 
-        <a class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-4 form-group info-block" href="{{ route('artisan-jobs-create') }}">
+        <a class="col-xs-8 col-xs-offset-2 col-sm-3 form-group info-block" href="{{ route('artisan-jobs-create') }}">
             <i class="fa fa-square-o fa-5x"></i>
             <h3>NEW JOB</h3>
             <h1>{{ '+' }}</h1>
