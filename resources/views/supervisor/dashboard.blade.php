@@ -9,7 +9,7 @@
             <h1>{{ $active }}</h1>
         </a>
 
-        <a class="col-xs-8 col-xs-offset-2 col-sm-3 form-group info-block" href="{{ route('home-signout') }}">
+        <a class="col-xs-8 col-xs-offset-2 col-sm-3 form-group info-block" href="{{ route('supervisor-requests-show') }}">
             <i class="fa fa-file-text fa-5x"></i>
             <h3>JOB REQUESTS</h3>
             <h1>{{ $requests }}</h1>

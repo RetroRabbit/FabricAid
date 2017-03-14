@@ -92,7 +92,10 @@ Route::get('/admin/companies/active/{company}',     'CompanyController@active')-
 // ADMIN ---------------------------------------------------------------------------------------------------------------
 
 // SUPERVISOR -------------------------------------------------------------------------------------------------------------
-Route::get('/supervisor/dashboard',          'SupervisorController@dashboard')->name('supervisor-dashboard');
+Route::get('/supervisor/dashboard',              'SupervisorController@dashboard')->name('supervisor-dashboard');
+
+Route::get('/supervisor/jobs/requests',          'SupervisorController@show_requests')->name('supervisor-requests-show');
+Route::get('/supervisor/jobs/requests/{job}',    'SupervisorController@update_requests')->name('supervisor-requests-update');
 // SUPERVISOR -------------------------------------------------------------------------------------------------------------
 
 // ARTISAN -------------------------------------------------------------------------------------------------------------
