@@ -163,7 +163,7 @@ a:focus {
 
 @media (max-width: 768px){.home .navbar-header:after { left: 5%; }}
 .home .navbar-header:after {
-	content: "Insert tagline or slogan here.";
+	content: "Venture Management System";
 
 	position: relative;
 	height: 10px;
@@ -553,24 +553,19 @@ csmall2 {
 	{
 		display: block;
 		position: relative;
-		margin-top: 88px;
+		padding-top: 88px;
 		height: auto;
 		background: whitesmoke;
 
 		transition: 0.2s;
-		-webkit-box-shadow: inset  0  5px 2px -5px #696868, 
-                        	inset  0 -5px 2px -5px #696868;
-		-moz-box-shadow: 	inset  0  5px 2px -5px #696868, 
-							inset  0 -5px 2px -5px #696868;
-		box-shadow: 		inset  0  5px 2px -5px #696868, 
-							inset  0 -5px 2px -5px #696868;
+		border-bottom: solid 1px #696868;
 	}
 		.subheader h1
 		{
 			font-size: 26px;
 			text-align: left;
 		}
-	@media (min-width: 768px) and (max-width: 992px) { .subheader { margin-top: 150px; } }
+	@media (min-width: 768px) and (max-width: 992px) { .subheader.admin { padding-top: 150px; } }
 
 	.input-form
 	{
@@ -686,4 +681,27 @@ csmall2 {
 	background: white;
 	padding-top: 50px;
 	padding-bottom: 50px;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus
+{
+	color: white;
+}
+.navbar-default .navbar-nav > .active > a:after,
+.navbar-default .navbar-nav > .active > a:hover:after,
+.navbar-default .navbar-nav > .active > a:focus:after
+{
+	content: "";
+
+	position: absolute;
+	display: block;
+	
+	bottom: 5px;
+	left: 0px;
+	height: 2px;
+	width: 100%;
+
+	background: #00b3fe;
 }

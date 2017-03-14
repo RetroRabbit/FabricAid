@@ -34,7 +34,7 @@
             <p class="hidden-xs col-sm-1">{{ $i + 1 }}</p>
             <p class="col-xs-4">{{ $areas[$i]->Code }}</p>
             <p class="col-xs-6">{{ $areas[$i]->Name }}</p>
-            <a class="col-xs-1" style="text-align: right; color: #384452;" href="{{ route('admin-areas-update', $areas[$i]->Id) }}"><i class="fa fa-pencil" aria-hidden="true" style="line-height: 40px;"></i></a>
+            <a class="col-xs-1" style="text-align: center; color: #384452;" href="{{ route('admin-areas-update', $areas[$i]->Id) }}"><i class="fa fa-pencil" aria-hidden="true" style="line-height: 40px;"></i></a>
         </div>
         @endfor
     </div>

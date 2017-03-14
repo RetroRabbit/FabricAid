@@ -44,8 +44,6 @@ class JobController extends Controller
             array_push($requests, $request->fillForeignKeys());
         }
 
-        //dd($requests);
-
         return view('artisan.jobs.requests')->with('title', 'Artisan | Jobs')
                                             ->with('header', 'Job Request List')
                                             ->with('requests', $requests);
